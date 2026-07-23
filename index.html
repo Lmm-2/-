@@ -3,37 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شجرة عائلة آل مصطفى ووداد</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+    <title>عالم القطط السحري 🐾 | إهداء خاص</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Mada:wght@600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #f4f9f4;
-            --accent-green: #2e7d32;
-            --light-green: #e8f5e9;
-            --gold-accent: #d4af37;
+            --bg-cream: #fdfbf7;
+            --soft-pink: #fce4ec;
+            --accent-peach: #ff8a65;
+            --warm-orange: #ff7043;
+            --text-dark: #4a3e3d;
+            --text-muted: #8d7b7a;
             --card-bg: #ffffff;
-            --text-dark: #2c3e50;
-            --text-muted: #607d8b;
-            --deceased-color: #78909c;
-            --border-color: #c8e6c9;
-            --shadow: 0 10px 25px rgba(46, 125, 50, 0.08);
-            --member-bg: #f9fbf9;
-            --subitem-color: #455a64;
-        }
-
-        body.dark-mode {
-            --primary-bg: #121813;
-            --accent-green: #66bb6a;
-            --light-green: #1e2c20;
-            --gold-accent: #ffd54f;
-            --card-bg: #1a231c;
-            --text-dark: #e8f5e9;
-            --text-muted: #b0bec5;
-            --deceased-color: #90a4ae;
-            --border-color: #2e4a32;
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            --member-bg: #222d24;
-            --subitem-color: #cfd8dc;
+            --shadow: 0 10px 25px rgba(255, 112, 67, 0.08);
+            --border-soft: #f4e8e1;
         }
 
         * {
@@ -41,30 +23,496 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--primary-bg);
-            background-image: radial-gradient(var(--border-color) 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(#f4e8e1 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
             color: var(--text-dark);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* Fullscreen Welcome Overlay */
-        #welcome-screen {
+        /* Password Lock Screen */
+        #lock-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--light-green) 0%, var(--card-bg) 50%, var(--primary-bg) 100%);
+            height: 100%;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0b2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .lock-box {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            border: 2px solid var(--border-soft);
+        }
+
+        .lock-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(255, 112, 67, 0.2);
+        }
+
+        .pass-hint {
+            background: var(--soft-pink);
+            color: var(--warm-orange);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 15px;
+            font-weight: 700;
+            margin: 10px 0 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .lock-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffab91;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px 60px 20px;
+            display: none;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff0f3 100%);
+            border-radius: 30px;
+            border: 2px solid var(--border-soft);
+            box-shadow: var(--shadow);
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: var(--soft-pink);
+            color: var(--warm-orange);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            color: var(--warm-orange);
+            font-family: 'Mada', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        /* Dedication Message */
+        .dedication-card {
+            background: var(--card-bg);
+            border: 2px dashed #ffab91;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .dedication-title {
+            font-size: 1.4rem;
+            color: var(--accent-peach);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .dedication-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .dedication-signature {
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--warm-orange);
+            font-size: 1.1rem;
+        }
+
+        /* Grid System */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 25px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--warm-orange);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff8a65 0%, #ff7043 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 112, 67, 0.2);
+            transition: all 0.2s ease;
+            margin: 3px;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+        }
+
+        .btn-secondary {
+            background: var(--soft-pink);
+            color: var(--warm-orange);
+            box-shadow: none;
+        }
+
+        /* 1. Secret Notes */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .note-item {
+            background: #fff8f6;
+            border: 2px dashed #ffab91;
+            border-radius: 16px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .note-item:hover {
+            background: var(--soft-pink);
+        }
+
+        /* 2. Mood Board */
+        .mood-box {
+            text-align: center;
+            background: #fff8f6;
+            padding: 15px;
+            border-radius: 18px;
+            border: 1px solid #ffe0b2;
+        }
+
+        .mood-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* 3. Psychic Cat */
+        .psychic-box {
+            text-align: center;
+            background: #fff8f6;
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px dashed #ffab91;
+        }
+
+        .paw-btn {
+            font-size: 3rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.2s;
+            user-select: none;
+        }
+
+        .paw-btn:active {
+            transform: scale(0.85);
+        }
+
+        /* 4. Cat Cinema Memes */
+        .meme-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding: 20px 0;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Lock Screen / Welcome Modal -->
+<div id="lock-screen">
+    <div class="lock-box">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400" alt="Cute Real Cat" class="lock-img">
+        <h2>أهلاً بكِ في مفاجأتكِ الخاصة! 🐾</h2>
+        <p style="color: var(--text-muted); margin-top: 8px;">ادخلي كلمة السر لفتح الموقع:</p>
+        <div class="pass-hint">كلمة السر هي: cat</div>
+        <br>
+        <input type="text" id="passInput" placeholder="اكتبي كلمة السر هنا...">
+        <button class="btn" style="width: 100%; padding: 12px;" onclick="checkPassword()">دخول ✨</button>
+        <p id="error-msg" style="color: red; font-size: 0.85rem; margin-top: 10px; display: none;">كلمة السر غير صحيحة، جربي كلمة cat</p>
+    </div>
+</div>
+
+<!-- Main Website Container -->
+<div class="container" id="main-content">
+    
+    <header>
+        <span class="header-badge">مساحة خاصة ومليئة بالدفء 🐾</span>
+        <h1>عالم القطط السحري 🐱</h1>
+        <p>ركن ممتع مصمم بالحب والدلال لأجمل أخت في الدنيا!</p>
+    </header>
+
+    <!-- Dedication Card -->
+    <div class="dedication-card">
+        <div class="dedication-title">رسالة خاصة من القلب 💖</div>
+        <div class="dedication-text">
+            "صحيح أنني لا أحب القطط كثيراً.. ولكنني أحبك أنتِ جداً! <br>
+            ولأن ابتسامتك ورؤيتك سعيدة هما أغلى ما لدي، صممت لكِ هذا العالم الصغير اللطيف ليُسعد قلبكِ دائماً!"
+        </div>
+        <div class="dedication-signature">صُنع بحب من أختكِ لجين ✨</div>
+    </div>
+
+    <div class="section-grid">
+
+        <!-- 1. Secret Cat Notes -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-title">💌 رسائل القطط السرية (اضغطي لفتح الرسالة)</div>
+            <div class="notes-grid">
+                <div class="note-item" onclick="showNote(1)">
+                    <div style="font-size: 2rem;">🐾</div>
+                    <div style="font-weight: 700; margin-top: 5px;">رسالة #1</div>
+                </div>
+                <div class="note-item" onclick="showNote(2)">
+                    <div style="font-size: 2rem;">🐟</div>
+                    <div style="font-weight: 700; margin-top: 5px;">رسالة #2</div>
+                </div>
+                <div class="note-item" onclick="showNote(3)">
+                    <div style="font-size: 2rem;">✨</div>
+                    <div style="font-weight: 700; margin-top: 5px;">رسالة #3</div>
+                </div>
+            </div>
+            <p id="noteDisplay" style="margin-top: 15px; text-align: center; font-weight: 700; color: var(--warm-orange); min-height: 25px;"></p>
+        </div>
+
+        <!-- 2. Cat Mood Board -->
+        <div class="card">
+            <div class="card-title">🐱 كيف حال قطتك اليوم؟ (Cat Mood)</div>
+            <div class="mood-box">
+                <img id="moodImage" src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400" class="mood-img" alt="Cat Mood">
+                <p id="moodText" style="font-weight: 700; margin-bottom: 12px; color: var(--text-dark);">حالة الاسترخاء التام 💤</p>
+                <div>
+                    <button class="btn btn-secondary" onclick="setMood('sleepy')">مروقة ☀️</button>
+                    <button class="btn btn-secondary" onclick="setMood('hungry')">جوعانة 🐟</button>
+                    <button class="btn btn-secondary" onclick="setMood('playful')">مجنونة 🐾</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Psychic Cat -->
+        <div class="card">
+            <div class="card-title">🔮 تبصير القطة السحرية</div>
+            <div class="psychic-box">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">فكري في سؤال ببالكِ ثم اضغطي على كف القطة:</p>
+                <div class="paw-btn" onclick="askPsychicCat()">🐾</div>
+                <p id="psychicAnswer" style="font-weight: 800; color: var(--warm-orange); margin-top: 15px;">انقري هنا لتعرفي الإجابة!</p>
+            </div>
+        </div>
+
+        <!-- 4. Cat Cinema Memes -->
+        <div class="card">
+            <div class="card-title">🍿 سينما لقطط مضحكة</div>
+            <div style="text-align: center;">
+                <img id="memeImg" src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400" class="meme-img" alt="Meme Cat">
+                <p id="memeCaption" style="font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">"لما تكتشفي إنو في أكل بالثلاجة بالليل:"</p>
+                <button class="btn" style="width: 100%;" onclick="nextMeme()">صورة جديدة 🎬</button>
+            </div>
+        </div>
+
+        <!-- 5. Queen of Cats Consultation -->
+        <div class="card">
+            <div class="card-title">👑 نصيحة خبيرة القطط</div>
+            <div style="background: #fff8f6; padding: 15px; border-radius: 16px; border: 1px dashed #ffab91; text-align: center;">
+                <p id="tipText" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-dark);">"القطط لما تطلع فيكي وتغمض عيونها ببطء، هاي طريقتها لتقول أحبك!"</p>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="nextTip()">نصيحة ثانية 💡</button>
+        </div>
+
+        <!-- 6. Adoption Test -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-title">📜 اختبار ملكة القطط: هل أنتِ جاهزة لتبني قطة؟</div>
+            <div id="testBox" style="background: #fff8f6; padding: 20px; border-radius: 16px; text-align: center; border: 1px solid #ffe0b2;">
+                <p id="testQuestion" style="font-weight: 700; margin-bottom: 15px;">سؤال 1: لو القطة خربشت الكنباية شو بتعملي؟</p>
+                <div id="testOptions">
+                    <button class="btn btn-secondary" style="width: 100%; margin-bottom: 8px;" onclick="answerTest(1)">بسامحها فوراً لأنها كيوت 🥺</button>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="answerTest(2)">بعطيها لعبة خربشة خاصة 🐾</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        صُنع بكثير من الحب والدلال لأجمل أخت في الدنيا 💖 | تصميم لجين ✨
+    </footer>
+</div>
+
+<script>
+    let audioCtx = null;
+
+    function createMeowSound() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(550, now);
+        osc.frequency.exponentialRampToValueAtTime(850, now + 0.15);
+        osc.frequency.exponentialRampToValueAtTime(400, now + 0.5);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+
+        osc.start(now);
+        osc.stop(now + 0.5);
+    }
+
+    function checkPassword() {
+        const input = document.getElementById('passInput').value.trim().toLowerCase();
+        const errorMsg = document.getElementById('error-msg');
+        
+        if (input === 'cat') {
+            document.getElementById('lock-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            createMeowSound();
+        } else {
+            errorMsg.style.display = 'block';
+        }
+    }
+
+    const notes = [
+        "",
+        "القطة بتقولك: أنتِ أفضل وألطف أخت في الدنيا كل يوم! 💖",
+        "تذكير لطيف: الابتسامة بتلبقلك جداً، خليكي دايماً مبسوطة ✨",
+        "القطة كشفت سر: لجين بتحبك كتير ومجهزة هالشي لترسم بسمة على وجهك! 🐾"
+    ];
+    function showNote(num) {
+        document.getElementById('noteDisplay').textContent = notes[num];
+        createMeowSound();
+    }
+
+    function setMood(type) {
+        const img = document.getElementById('moodImage');
+        const txt = document.getElementById('moodText');
+        if(type === 'sleepy') {
+            img.src = 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400';
+            txt.textContent = 'حالة الاسترخاء تحت الشمس ☀️';
+        } else if(type === 'hungry') {
+            img.src = 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400';
+            txt.textContent = 'نظرة "وين التونة تبعتي؟" 🐟';
+        } else {
+            img.src = 'https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400';
+            txt.textContent = 'طاقة ومرح وسباقات بالبيت 🐾';
+        }
+    }
+
+    const answers = [
+        "القطة بتقول: نعم طبعاً! ✨",
+        "القطة بتنصحك بالاسترخاء وأخذ قسط من النوم 💤",
+        "الإجابة هي: خبر سار بانتظارك اليوم! 🌸",
+        "القطة بتقول: امم.. اسألي أختك لجين أفضل! 😸",
+        "بالتأكيد! الأشياء الحلوة جاية بالطريق 💖"
+    ];
+    function askPsychicCat() {
+        const randomAns = answers[Math.floor(Math.random() * answers.length)];
+        document.getElementById('psychicAnswer').textContent = randomAns;
+        createMeowSound();
+    }
+
+    const memes = [
+        { img: 'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400', cap: '"لما تكتشفي إنو في أكل بالثلاجة بالليل:"' },
+        { img: 'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400', cap: '"شغلي الهدوء والدفء واستمتعي بيومك ✨"' },
+        { img: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400', cap: '"نظرتك لما حد يقولك القطة مش كيوت:"' }
+    ];
+    let memeIdx = 0;
+    function nextMeme() {
+        memeIdx = (memeIdx + 1) % memes.length;
+        document.getElementById('memeImg').src = memes[memeIdx].img;
+        document.getElementById('memeCaption').textContent = memes[memeIdx].cap;
+    }
+
+    const tips = [
+        "القطط لما تطلع فيكي وتغمض عيونها ببطء، هاي طريقتها لتقول أحبك!",
+        "خرير القطط يمتلك ترددات تساعد على نشر الطاقة الإيجابية والهدوء.",
+        "القطط تحب الأماكن المرتفعة لأنها بتعطيها شعور بالأمان والسيطرة."
+    ];
+    let tipIdx = 0;
+    function nextTip() {
+        tipIdx = (tipIdx + 1) % tips.length;
+        document.getElementById('tipText').textContent = tips[tipIdx];
+    }
+
+    function answerTest(opt) {
+        document.getElementById('testBox').innerHTML = `
+            <h3 style="color:var(--warm-orange); margin-bottom:10px;">👑 النتيجة: أنتِ رسمياً ملكة القطط!</h3>
+            <p style="color:var(--text-dark);">قلبك طيب وصبور وتستحقي تكوني أفضل صاحبة قطة بالدنيا! 🐾✨</p>
+        `;
+        createMeowSound();
+    }
+</script>
+
+</body>
+</html>
             display: flex;
             flex-direction: column;
             justify-content: center;
