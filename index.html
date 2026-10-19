@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نَظِّمْها - المنصة الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdf6f9;
+            --nav-bg: #b56576;
+            --card-bg: #ffffff;
+            --text-color: #4a2830;
+            --border-color: #f3c6d1;
+            --btn-bg: #b56576;
+            --btn-hover: #934c5b;
+            --input-bg: #fff9fb;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+
+            /* ألوان الطباعة الافتراضية - قابلة للتخصيص */
+            --custom-main: #b5838d;
+            --custom-light: #e5989b;
+            --custom-soft-bg: #fff0f3;
+            --custom-border: #f2c6de;
+            --custom-table-header: #6d597a;
+            --custom-day-bg: #f7ede2;
+        }
+
+        body.theme-female {
+            --bg-color: #fdf6f9;
+            --nav-bg: #b56576;
+            --card-bg: #ffffff;
+            --text-color: #4a2830;
+            --border-color: #f3c6d1;
+            --btn-bg: #b56576;
+            --btn-hover: #934c5b;
+            --input-bg: #fff9fb;
+        }
+
+        body.theme-male {
+            --bg-color: #f4f6f9;
+            --nav-bg: #2c3e50;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+            --btn-bg: #3498db;
+            --btn-hover: #2980b9;
+            --input-bg: #ffffff;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --nav-bg: #1f1f1f;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --border-color: #333333;
+            --btn-bg: #b56576;
+            --btn-hover: #934c5b;
+            --input-bg: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alexandria', sans-serif !important;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 75px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .top-header-wrapper {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            background: var(--btn-bg);
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 6px 0;
+            display: flex;
+        }
+
+        .ticker-move {
+            display: flex;
+            width: max-content;
+            animation: infiniteTicker 18s linear infinite;
+        }
+
+        .ticker-item {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 0 15px;
+        }
+
+        @keyframes infiniteTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+
+        header {
+            background: var(--card-bg);
+            width: 100%;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--nav-bg);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex: 1;
+        }
+
+        .banner-slider-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            background: linear-gradient(135deg, var(--nav-bg), var(--btn-hover));
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .banner-slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .banner-slide.active {
+            display: flex;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .banner-slide h3 { font-size: 16px; font-weight: 800; }
+        .banner-slide p { font-size: 12px; opacity: 0.9; margin-bottom: 6px; }
+        
+        .banner-btn {
+            background: white;
+            color: var(--nav-bg);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .dot.active {
+            background: white;
+            width: 18px;
+            border-radius: 10px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .card h2 {
+            color: var(--nav-bg);
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            background: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        textarea { height: 75px; resize: vertical; }
+
+        button.action-btn {
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-row { display: flex; gap: 8px; }
+        .form-row > * { flex: 1; }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        @media (min-width: 600px) {
+            .sections-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .section-box {
+            background: var(--input-bg);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1.5px solid var(--border-color);
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .section-box h3 { font-size: 13px; font-weight: 700; color: var(--nav-bg); }
+
+        .back-nav-btn {
+            background: rgba(0,0,0,0.06);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .item-card {
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border-right: 5px solid var(--nav-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media(min-width: 600px) {
+            .item-card { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
+
+        .item-card.completed { opacity: 0.6; background: rgba(0,0,0,0.02); }
+        .item-card.completed .item-title { text-decoration: line-through; }
+        .item-card.expired { border-right-color: var(--accent-red) !important; }
+
+        .item-details h3 { font-size: 14px; font-weight: 700; color: var(--nav-bg); margin-bottom: 2px; }
+        .item-details p { font-size: 12px; line-height: 1.4; }
+
+        .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+        .badge-done { background: #d1fae5; color: #065f46; }
+        .badge-expired { background: #fee2e2; color: #991b1b; }
+
+        .item-actions { display: flex; gap: 4px; justify-content: flex-end; width: 100%; }
+        @media(min-width: 600px) { .item-actions { width: auto; } }
+
+        .btn-sm {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+        .btn-done { background: var(--accent-green); }
+        .btn-edit { background: var(--accent-blue); }
+        .btn-delete { background: var(--accent-red); }
+
+        .calendar-control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            background: var(--input-bg);
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cal-nav-btn {
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .calendar-container {
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+        .calendar-day-name { font-weight: bold; opacity: 0.8; font-size: 11px; padding-bottom: 4px; text-align: center; }
+
+        .calendar-cell {
+            min-height: 68px;
+            background: var(--input-bg);
+            border-radius: 6px;
+            padding: 3px 2px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .calendar-cell:hover {
+            transform: scale(1.02);
+            border-color: var(--btn-bg);
+        }
+
+        .calendar-cell.has-exam { background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.3); }
+        .calendar-cell .day-num { font-weight: 700; font-size: 11px; margin-bottom: 2px; }
+
+        .day-status-indicator { font-size: 8px; font-weight: 800; padding: 1px; border-radius: 3px; margin-bottom: 2px; width: 100%; text-align: center; }
+        .status-exam { background: #fca5a5; color: #7f1d1d; }
+
+        .calendar-event {
+            font-size: 8px;
+            color: white;
+            padding: 2px 3px;
+            border-radius: 3px;
+            margin-top: 2px;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.1;
+            word-break: break-word;
+        }
+
+        .printable-sheet-wrapper {
+            width: 100%;
+            background: #ffffff;
+            padding: 12px 16px;
+            border: 3.5px solid var(--custom-main);
+            border-radius: 16px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            margin-top: 10px;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .printable-sheet-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 4px; bottom: 4px; left: 4px; right: 4px;
+            border: 1.5px dashed var(--custom-light);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .sheet-header {
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .sheet-title {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--custom-main), var(--custom-light));
+            color: white;
+            padding: 5px 35px;
+            border-radius: 20px;
+            font-size: 17px;
+            font-weight: 800;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .student-info-bar {
+            display: flex;
+            justify-content: space-around;
+            background: var(--custom-soft-bg);
+            border: 1.5px solid var(--custom-border);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--custom-main);
+        }
+
+        .info-item input {
+            border: none;
+            border-bottom: 1.5px solid var(--custom-main);
+            background: transparent;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-color);
+            width: 100px;
+            text-align: center;
+            outline: none;
+            padding: 1px;
+            margin: 0 4px;
+        }
+
+        .schedule-table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 550px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .schedule-table-custom th, .schedule-table-custom td {
+            border: 1.5px solid var(--custom-border);
+            padding: 7px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .schedule-table-custom th {
+            background-color: var(--custom-table-header) !important;
+            color: white !important;
+            font-size: 13px;
+            font-weight: 800;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .schedule-table-custom td.day-cell {
+            background-color: var(--custom-day-bg) !important;
+            font-weight: 800;
+            color: var(--custom-table-header);
+            font-size: 13px;
+            width: 12%;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .schedule-table-custom td input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a2830;
+            outline: none;
+        }
+
+        .sheet-bottom-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .quote-banner-box {
+            background: var(--custom-soft-bg);
+            border: 1.5px dashed var(--custom-light);
+            border-radius: 8px;
+            padding: 6px 10px;
+            text-align: center;
+        }
+
+        .quote-banner-box textarea {
+            width: 100%;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--custom-main);
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+            resize: none;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .notes-print-area {
+            background: #fff9fb;
+            border: 1.5px solid var(--custom-border);
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        .notes-print-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--custom-main);
+            margin-bottom: 4px;
+        }
+
+        .notes-blank-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .blank-line {
+            border-bottom: 1.5px dashed var(--custom-light);
+            height: 14px;
+        }
+
+        .sheet-footer {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--custom-main);
+            padding-top: 2px;
+        }
+
+        /* ------------------------------------------------------------- */
+        /* قواعد طباعة مصلحة ومضمونة 100% لإيقاف الصفحة البيضاء */
+        /* ------------------------------------------------------------- */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            html, body {
+                width: 100% !important;
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                overflow: visible !important;
+            }
+
+            body {
+                display: block !important;
+            }
+
+            .container, .card, #appScreen {
+                padding: 0 !important;
+                margin: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            #printableSheetArea {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: 100vw !important;
+                max-height: 100vh !important;
+                margin: 0 !important;
+                padding: 8mm 12mm !important;
+                box-sizing: border-box !important;
+                border: 4px solid var(--custom-main) !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .schedule-table-custom {
+                min-width: 100% !important;
+                width: 100% !important;
+                margin: 4px 0 !important;
+            }
+
+            .schedule-table-custom th {
+                padding: 7px 3px !important;
+                font-size: 12px !important;
+            }
+
+            .schedule-table-custom td {
+                padding: 7px 3px !important;
+                font-size: 11px !important;
+            }
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            border-top: 1.5px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            z-index: 999;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--text-color);
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            flex: 1;
+            opacity: 0.7;
+        }
+
+        .nav-item.active {
+            color: var(--nav-bg);
+            opacity: 1;
+        }
+
+        .nav-item-icon { font-size: 18px; }
+
+        .add-quick-btn {
+            background: var(--btn-bg);
+            color: white !important;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-top: -18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid var(--card-bg);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 15px;
+        }
+
+        .popup-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            text-align: right;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        footer {
+            background: var(--nav-bg);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            width: 100%;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body id="mainBody">
+
+    <div class="top-header-wrapper no-print">
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                <div class="ticker-item" id="tickerMsg1">✨ مرحباً بكِ في موقع نَظِّمْها الذكي &nbsp;•&nbsp; 💡 "النجاح يبدأ بتنظيم خطوتكِ الأولى" &nbsp;•&nbsp; 📚 نسّقي امتحاناتكِ وحصصكِ المدرسية بكل سهولة!</div>
+                <div class="ticker-item" id="tickerMsg2">✨ مرحباً بكِ في موقع نَظِّمْها الذكي &nbsp;•&nbsp; 💡 "النجاح يبدأ بتنظيم خطوتكِ الأولى" &nbsp;•&nbsp; 📚 نسّقي امتحاناتكِ وحصصكِ المدرسية بكل سهولة!</div>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-title">📌 نَظِّمْها</div>
+            <div class="header-icons">
+                <div class="icon-btn" onclick="openGuideModal()" title="دليل الاستخدام">📖</div>
+                <div class="icon-btn" onclick="toggleNightMode()" id="darkModeToggleBtn" title="الوضع الليلي">🌙</div>
+                <div class="icon-btn" onclick="copySiteLink()" title="نسخ الرابط">🔗</div>
+            </div>
+        </header>
+    </div>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="authScreen" class="no-print" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; width: 100%; padding: 15px; max-width: 420px; margin: auto;">
+        <div class="card" style="width: 100%; text-align: center;">
+            <h2>✨ أهلاً بكِ في موقع نَظِّمْها</h2>
+            <p style="margin-bottom: 12px; font-size: 12px; opacity: 0.8;" id="authSubtitle">سجّلي دخولكِ للبدء بتنظيم جدولكِ الذكي 👩</p>
+            
+            <input type="text" id="userName" placeholder="اسمكِ الكريم...">
+            <input type="text" id="uniqueId" placeholder="رقم تعريفي خاص بكِ...">
+            
+            <label style="display: block; text-align: right; margin-bottom: 4px; font-weight: bold; font-size: 12px;" id="genderLabel">اختاري التصنيف:</label>
+            <div class="form-row" style="margin-bottom: 10px;">
+                <button type="button" class="action-btn" id="maleOpt" onclick="selectGender('male')" style="background: transparent; color: var(--text-color); border: 1.5px solid var(--border-color);">ذكر 👨</button>
+                <button type="button" class="action-btn" id="femaleOpt" onclick="selectGender('female')" style="background: transparent; color: var(--text-color); border: 1.5px solid var(--border-color);">أنثى 👩</button>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; text-align: right;">
+                <input type="checkbox" id="rememberMeAuth" style="width: auto; margin: 0;" checked>
+                <label for="rememberMeAuth" style="font-size: 12px; font-weight: 700; cursor: pointer;" id="rememberLabel">تذكّريني عند العودة مرة أخرى 🔔</label>
+            </div>
+
+            <button class="action-btn" onclick="registerUser()" style="width: 100%;" id="loginBtnText">دخول 🚀</button>
+        </div>
+    </div>
+
+    <!-- الشاشة الرئيسية للتطبيق -->
+    <div id="appScreen" style="display: none; width: 100%; flex-direction: column; align-items: center; flex: 1;">
+
+        <div class="container">
+
+            <div id="homeSectionsView" class="no-print">
+                
+                <div class="banner-slider-wrapper">
+                    <div class="banner-slide active" id="slide1">
+                        <h3>⚡ مُنسق الفاينل الذكي</h3>
+                        <p id="slide1Desc">رتب امتحاناتك وأوقاتك المتاحة واحصل على خطة دراسية متوازنة بدون ضغط!</p>
+                        <button class="banner-btn" onclick="openSection('finalsWizard')" id="slide1Btn">جربي المساعد الآن 🚀</button>
+                    </div>
+
+                    <div class="banner-slide" id="slide2">
+                        <h3>🗓️ جدول الحصص المدرسية</h3>
+                        <p id="slide2Desc">أدخلي أيام دوامك وحصصك واختاري الألوان والتصاميم المخصصة للطباعة!</p>
+                        <button class="banner-btn" onclick="openSection('schoolSchedule')" id="slide2Btn">إنشاء الجدول 🖨️</button>
+                    </div>
+
+                    <div class="banner-slide" id="slide3">
+                        <h3>📊 مولّد جدول الدراسة الذكي</h3>
+                        <p id="slide3Desc">نسّقي موادك والأجزاء المطلوبة لمراجعتها في جدول دراسي تفاعلي أنيق!</p>
+                        <button class="banner-btn" onclick="openSection('studyPlanner')" id="slide3Btn">توليد جدولكِ 📖</button>
+                    </div>
+
+                    <div class="slider-dots">
+                        <div class="dot active" onclick="setSlide(0)"></div>
+                        <div class="dot" onclick="setSlide(1)"></div>
+                        <div class="dot" onclick="setSlide(2)"></div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 12px;">
+                    <h2 id="homeSectionViewTitle">الأقسام الرئيسية 🤎</h2>
+
+                    <div class="sections-grid">
+                        <div class="section-box" onclick="openSection('exams')">
+                            <span style="font-size: 22px;">📚</span>
+                            <h3>الامتحانات</h3>
+                        </div>
+                        <div class="section-box" onclick="openSection('studyPlanner')">
+                            <span style="font-size: 22px;">📊</span>
+                            <h3>جدول الدراسة</h3>
+                        </div>
+                        <div class="section-box" onclick="openSection('schoolSchedule')">
+                            <span style="font-size: 22px;">🗓️</span>
+                            <h3>جدول الحصص</h3>
+                        </div>
+                        <div class="section-box" onclick="openSection('finalsWizard')">
+                            <span style="font-size: 22px;">⚡</span>
+                            <h3>مساعد الفاينل</h3>
+                        </div>
+                        <div class="section-box" onclick="openSection('cooking')">
+                            <span style="font-size: 22px;">🍳</span>
+                            <h3>الطبخ والأكلات</h3>
+                        </div>
+                        <div class="section-box" onclick="openSection('outings')">
+                            <span style="font-size: 22px;">🚗</span>
+                            <h3>المشاوير والطلعات</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 12px;" id="calendarSectionView">
+                    <div class="calendar-container">
+                        <div class="calendar-control-bar">
+                            <button class="cal-nav-btn" onclick="changeMonth(-1)" id="prevMonthBtn">▶ السابق</button>
+                            <div style="display: flex; gap: 4px;">
+                                <select id="calMonthSelect" onchange="jumpToMonth()" style="padding: 4px; font-size: 12px; margin: 0; width: auto; font-weight: bold;"></select>
+                                <select id="calYearSelect" onchange="jumpToMonth()" style="padding: 4px; font-size: 12px; margin: 0; width: auto; font-weight: bold;"></select>
+                            </div>
+                            <button class="cal-nav-btn" onclick="changeMonth(1)" id="nextMonthBtn">اللاحق ◀</button>
+                        </div>
+
+                        <div class="calendar-grid" id="masterCalendarGrid"></div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 12px;" id="tasksHomeCard">
+                    <h3 style="color: var(--nav-bg); margin-bottom: 8px; font-size: 15px; font-weight: 700;" id="tasksHomeTitle">📌 قائمة المهام والالتزامات</h3>
+                    <div id="homeTasksList"></div>
+                </div>
+            </div>
+
+            <!-- 1. الامتحانات -->
+            <div id="examsSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()" id="backHomeExam">⬅ العودة للرئيسية</button>
+                <h2>📚 قسم الدراسة والامتحانات</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--border-color);">
+                    <input type="hidden" id="editingExamId" value="">
+                    <input type="text" id="examSubject" placeholder="اسم المادة...">
+                    
+                    <div class="form-row">
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">تاريخ الامتحان:</label>
+                            <input type="date" id="examDate">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">لون المادة:</label>
+                            <input type="color" id="examColor" value="#3498db" style="height: 38px; padding: 2px;">
+                        </div>
+                    </div>
+
+                    <textarea id="examContent" placeholder="المواضيع المطلوبة للدراسة..."></textarea>
+                    <button class="action-btn" id="examSubmitBtn" onclick="saveExam()" style="width: 100%;">إضافة الامتحان ✨</button>
+                </div>
+
+                <h3 style="margin-bottom: 8px; color: var(--nav-bg);">جدول الامتحانات</h3>
+                <div id="examsList"></div>
+            </div>
+
+            <!-- 2. مولد الجدول الدراسي -->
+            <div id="studyPlannerSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2>📊 مولّد جدول الدراسة والتصدير</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px;">
+                    <input type="text" id="plannerTitle" placeholder="عنوان الجدول...">
+                    <div id="plannerInputsContainer">
+                        <div class="form-row planner-item-row" style="margin-bottom: 6px;">
+                            <input type="text" class="p-subject" placeholder="المادة">
+                            <input type="text" class="p-topic" placeholder="الجزء المطلوب">
+                            <input type="text" class="p-time" placeholder="الوقت">
+                        </div>
+                    </div>
+                    <button class="action-btn" onclick="addPlannerRow()" style="background: #6b7280; margin-bottom: 8px; font-size: 11px;">+ إضافة مادة أخرى</button>
+                    <button class="action-btn" onclick="generateStudySchedule()" style="width: 100%;">توليد الجدول الأنيق 🚀</button>
+                </div>
+
+                <div id="generatedScheduleOutput"></div>
+            </div>
+
+            <!-- 3. جدول الحصص المدرسية -->
+            <div id="schoolScheduleSection" style="display: none;" class="card">
+                <button class="back-nav-btn no-print" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2 class="no-print">🗓️ جدول الحصص المدرسية (مخصص بالكامل)</h2>
+                
+                <div class="no-print" style="background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                    <div class="form-row" style="margin-bottom: 8px;">
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">أيام الدوام:</label>
+                            <select id="workDaysSelect" onchange="setupSchoolGrid()">
+                                <option value="sun-thu">من الأحد إلى الخميس</option>
+                                <option value="mon-fri">من الإثنين إلى الجمعة</option>
+                                <option value="sat-wed">من السبت إلى الأربعاء</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">عدد الحصص:</label>
+                            <select id="periodsCount" onchange="setupSchoolGrid()">
+                                <option value="5">5 حصص</option>
+                                <option value="6" selected>6 حصص</option>
+                                <option value="7">7 حصص</option>
+                                <option value="8">8 حصص</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 8px; margin-bottom: 8px;">
+                        <label style="font-size: 12px; font-weight: 800; color: var(--nav-bg); display: block; margin-bottom: 6px;">🎨 تخصيص ألوان الجدول والورقة حسب ذوقكِ:</label>
+                        <div class="form-row" style="gap: 6px;">
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">رأس الجدول:</label>
+                                <input type="color" id="colorHeader" value="#6d597a" onchange="updateCustomColors()" style="height: 32px; padding: 1px;">
+                            </div>
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">خلفية الأيام:</label>
+                                <input type="color" id="colorDayBg" value="#f7ede2" onchange="updateCustomColors()" style="height: 32px; padding: 1px;">
+                            </div>
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">اللون الرئيسي/الإطار:</label>
+                                <input type="color" id="colorMainBorder" value="#b5838d" onchange="updateCustomColors()" style="height: 32px; padding: 1px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 8px;">
+                        <label style="font-size: 11px; font-weight: bold;">اختر العبارة التحفيزية المكتوبة أسفل الجدول:</label>
+                        <select id="presetQuotesSelect" onchange="applyPresetQuote()" style="margin-bottom: 4px;">
+                            <option value="🤍 لا تأتي لذة النجاح إلا بعد الصبر على مر الكفاح - موفقة في دراستكِ!">🤍 لا تأتي لذة النجاح إلا بعد الصبر على مر الكفاح - موفقة في دراستكِ!</option>
+                            <option value="✨ شغفكِ هو وقودكِ نحو القمة.. استمري بجد واجتهاد!">✨ شغفكِ هو وقودكِ نحو القمة.. استمري بجد واجتهاد!</option>
+                            <option value="🌱 كل خطوة صغيرة اليوم تصنع إنجازاً عظيماً غداً.">🌱 كل خطوة صغيرة اليوم تصنع إنجازاً عظيماً غداً.</option>
+                            <option value="🌸 أحلامكِ تستحق العناء، كوني فخورة بكل جهد تبذلينه!">🌸 أحلامكِ تستحق العناء، كوني فخورة بكل جهد تبذلينه!</option>
+                        </select>
+                    </div>
+
+                    <button class="action-btn" onclick="saveSchoolScheduleToProfile()" style="background: var(--accent-green); width: 100%;">حفظ الجدول في الحساب 💾</button>
+                </div>
+
+                <div id="printableSheetArea" class="printable-sheet-wrapper">
+                    <div class="sheet-header">
+                        <div class="sheet-title">✨ جدول الحصص المدرسية ✨</div>
+                    </div>
+
+                    <div class="student-info-bar">
+                        <div class="info-item">الصف: <input type="text" id="studentGradeInput" placeholder="مثال: الحادي عشر"></div>
+                        <div class="info-item">الشعبة: <input type="text" id="studentSectionInput" placeholder="مثال: 1"></div>
+                        <div class="info-item">الفصل: <input type="text" id="studentTermInput" placeholder="الأول / الثاني"></div>
+                    </div>
+
+                    <div id="schoolInputsGrid" style="width: 100%;"></div>
+
+                    <div class="sheet-bottom-simple">
+                        <div class="quote-banner-box">
+                            <textarea id="customQuoteTextarea">🤍 لا تأتي لذة النجاح إلا بعد الصبر على مر الكفاح - موفقة في دراستكِ!</textarea>
+                        </div>
+
+                        <div class="notes-print-area">
+                            <div class="notes-print-title">📌 أهداف وملاحظات الفصل الدراسي:</div>
+                            <div class="notes-blank-lines">
+                                <div class="blank-line"></div>
+                                <div class="blank-line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sheet-footer">
+                        تم التصميم بواسطة منصة نَظِّمْها الذكي - أتمنى لكِ التوفيق والنجاح 🤍
+                    </div>
+                </div>
+
+                <div class="no-print" style="margin-top: 15px; text-align: center;">
+                    <button class="action-btn" onclick="window.print()" style="padding: 12px 30px; font-size: 15px;">طباعة الجدول بصفحة A4 واحدة 🖨️✨</button>
+                </div>
+            </div>
+
+            <!-- 4. مساعد الفاينل -->
+            <div id="finalsWizardSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2>⚡ مُنسق الفاينل الذكي</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px;">
+                    <div class="form-row">
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">ساعات الدراسة يومياً:</label>
+                            <input type="number" id="wizardDailyHours" value="6" min="1" max="16">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; font-weight: bold;">بداية وقت الدراسة:</label>
+                            <input type="time" id="wizardStartTime" value="16:00">
+                        </div>
+                    </div>
+
+                    <div id="wizardSubjectsContainer">
+                        <div class="form-row wizard-sub-row" style="margin-bottom: 6px;">
+                            <input type="text" class="w-sub-name" placeholder="المادة">
+                            <input type="number" class="w-sub-days" placeholder="أيام الدراسة" value="2">
+                            <input type="date" class="w-sub-date" placeholder="تاريخ الامتحان">
+                        </div>
+                    </div>
+                    <button class="action-btn" onclick="addWizardRow()" style="background: #6b7280; margin-bottom: 8px; font-size: 11px;">+ إضافة مادة</button>
+                    
+                    <textarea id="wizardNotes" placeholder="ملاحظات وظروف الدراسة..."></textarea>
+                    
+                    <button class="action-btn" onclick="generateFinalsPlan()" style="width: 100%;">توليد خطة الفاينل 🎯</button>
+                </div>
+
+                <div id="finalsPlanOutput"></div>
+            </div>
+
+            <!-- 5. الطبخ والأكلات -->
+            <div id="cookingSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2>🍳 قسم الطبخ والأكلات</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px;">
+                    <input type="hidden" id="editingDishId" value="">
+                    <input type="text" id="dishName" placeholder="اسم الطبخة...">
+                    <label style="font-size: 11px; font-weight: bold;">يوم التحضير:</label>
+                    <input type="date" id="dishDate">
+                    <textarea id="dishIngredients" placeholder="المقادير والمكونات..."></textarea>
+                    <button class="action-btn" id="dishSubmitBtn" onclick="saveDish()" style="width: 100%;">إضافة الطبخة 🍲</button>
+                </div>
+
+                <h3 style="margin-bottom: 8px; color: var(--nav-bg);">جدول الطبخات</h3>
+                <div id="cookingList"></div>
+            </div>
+
+            <!-- 6. المشاوير -->
+            <div id="outingsSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2>🚗 قسم المشاوير والطلعات</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px;">
+                    <input type="hidden" id="editingOutingId" value="">
+                    <input type="text" id="outingPlace" placeholder="مكان المشوار...">
+                    <label style="font-size: 11px; font-weight: bold;">تاريخ المشوار:</label>
+                    <input type="date" id="outingDate">
+                    <textarea id="outingNotes" placeholder="تفاصيل وملاحظات..."></textarea>
+                    <button class="action-btn" id="outingSubmitBtn" onclick="saveOuting()" style="width: 100%;">إضافة المشوار 🗺️</button>
+                </div>
+
+                <h3 style="margin-bottom: 8px; color: var(--nav-bg);">قائمة المشاوير</h3>
+                <div id="outingsList"></div>
+            </div>
+
+            <!-- 7. المهام اليومية -->
+            <div id="tasksSection" style="display: none;" class="card no-print">
+                <button class="back-nav-btn" onclick="backToHome()">⬅ العودة للرئيسية</button>
+                <h2>✅ قسم المهام اليومية</h2>
+                
+                <div style="background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px;">
+                    <input type="hidden" id="editingTaskId" value="">
+                    <input type="text" id="taskName" placeholder="المهمة المطلوبة...">
+                    <textarea id="taskNotes" placeholder="تفاصيل إضافية..."></textarea>
+                    <button class="action-btn" id="taskSubmitBtn" onclick="saveTask()" style="width: 100%;">إضافة المهمة 📌</button>
+                </div>
+
+                <h3 style="margin-bottom: 8px; color: var(--nav-bg);">قائمة المهام</h3>
+                <div id="tasksList"></div>
+            </div>
+
+        </div>
+
+        <div class="bottom-nav no-print">
+            <div class="nav-item active" onclick="backToHome()">
+                <span class="nav-item-icon">🏠</span>
+                <span id="navHomeText">الرئيسية</span>
+            </div>
+            <div class="nav-item" onclick="scrollToCalendar()">
+                <span class="nav-item-icon">📅</span>
+                <span id="navCalText">التقويم</span>
+            </div>
+            <div class="nav-item" onclick="openQuickAddModal()">
+                <div class="add-quick-btn">➕</div>
+            </div>
+            <div class="nav-item" onclick="openGuideModal()">
+                <span class="nav-item-icon">📖</span>
+                <span id="navGuideText">الدليل</span>
+            </div>
+            <div class="nav-item" onclick="logout()">
+                <span class="nav-item-icon">👤</span>
+                <span id="navAccText">حسابي</span>
+            </div>
+        </div>
+
+        <footer class="no-print">
+            <p>© 2026 موقع نَظِّمْها الذكي - جميع الحقوق محفوظة</p>
+            <p style="font-size: 11px; opacity: 0.9; margin-top: 2px;" id="footerCredit">فكرة وتصميم وإشراف: لُجين 🤍</p>
+        </footer>
+    </div>
+
+    <!-- نافذة تفاصيل اليوم -->
+    <div id="dayDetailModal" class="modal-overlay no-print">
+        <div class="popup-card">
+            <h3 style="color: var(--nav-bg); margin-bottom: 12px; text-align: center;" id="dayDetailDateTitle">أنشطة اليوم 📅</h3>
+            <div id="dayDetailContent" style="font-size: 13px; line-height: 1.6; margin-bottom: 14px;"></div>
+            <button class="action-btn" onclick="closeDayDetailModal()" style="width: 100%;" id="closeDayModalBtn">إغلاق ✖</button>
+        </div>
+    </div>
+
+    <!-- نافذة الإضافة السريعة -->
+    <div id="quickAddModal" class="modal-overlay no-print">
+        <div class="popup-card">
+            <h3 style="color: var(--nav-bg); margin-bottom: 12px; text-align: center;" id="quickAddTitle">إضافة نشاط سريع ✨</h3>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="action-btn" onclick="closeQuickAddModal(); openSection('exams');" id="qaExamBtn">📚 إضافة امتحان</button>
+                <button class="action-btn" onclick="closeQuickAddModal(); openSection('tasks');" id="qaTaskBtn">✅ إضافة مهمة جديدة</button>
+                <button class="action-btn" onclick="closeQuickAddModal(); openSection('cooking');" id="qaCookBtn">🍳 إضافة طبخة</button>
+                <button class="action-btn" onclick="closeQuickAddModal(); openSection('outings');" id="qaOutBtn">🚗 إضافة مشوار</button>
+            </div>
+            <button class="action-btn" onclick="closeQuickAddModal()" style="background: #6b7280; width: 100%; margin-top: 10px;" id="qaCancelBtn">إلغاء ✖</button>
+        </div>
+    </div>
+
+    <!-- نافذة الدليل -->
+    <div id="guideModal" class="modal-overlay no-print">
+        <div class="popup-card">
+            <h3 style="color: var(--nav-bg); margin-bottom: 10px; text-align: center;" id="guideModalTitle">📖 دليل استخدام موقع نَظِّمْها</h3>
+            <div style="font-size: 12px; line-height: 1.8; opacity: 0.9;" id="guideModalBody"></div>
+            <button class="action-btn" onclick="closeGuideModal()" style="width: 100%; margin-top: 12px;" id="guideModalCloseBtn">فهمتُ، ابدئي التنظيم ✨</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedGender = '';
+        let currentCalYear = 2026;
+        let currentCalMonth = 9;
+        let currentSlide = 0;
+
+        const monthNames = [
+            "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+            "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+        ];
+
+        window.onload = function() {
+            let rememberUser = localStorage.getItem('rememberUserFlag');
+            let activeUser = localStorage.getItem('activeUniversalUser');
+            
+            initCalDropdowns();
+            startAutoSlider();
+
+            if (rememberUser === 'true' && activeUser) {
+                let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+                if (allUsers[activeUser]) {
+                    loadUserSession(activeUser);
+                } else {
+                    document.getElementById('authScreen').style.display = 'flex';
+                }
+            } else {
+                document.getElementById('authScreen').style.display = 'flex';
+            }
+            setupSchoolGrid();
+        };
+
+        function updateCustomColors() {
+            let headerColor = document.getElementById('colorHeader').value;
+            let dayBgColor = document.getElementById('colorDayBg').value;
+            let mainBorderColor = document.getElementById('colorMainBorder').value;
+
+            document.documentElement.style.setProperty('--custom-table-header', headerColor);
+            document.documentElement.style.setProperty('--custom-day-bg', dayBgColor);
+            document.documentElement.style.setProperty('--custom-main', mainBorderColor);
+            document.documentElement.style.setProperty('--custom-light', mainBorderColor);
+            document.documentElement.style.setProperty('--custom-border', mainBorderColor + '55');
+            document.documentElement.style.setProperty('--custom-soft-bg', mainBorderColor + '15');
+        }
+
+        function applyPresetQuote() {
+            let selectedVal = document.getElementById('presetQuotesSelect').value;
+            if (selectedVal) {
+                document.getElementById('customQuoteTextarea').value = selectedVal;
+            }
+        }
+
+        function startAutoSlider() {
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % 3;
+                setSlide(currentSlide);
+            }, 5000);
+        }
+
+        function setSlide(index) {
+            currentSlide = index;
+            document.querySelectorAll('.banner-slide').forEach((s, i) => {
+                s.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        function openGuideModal() { document.getElementById('guideModal').style.display = 'flex'; }
+        function closeGuideModal() { document.getElementById('guideModal').style.display = 'none'; }
+        function openQuickAddModal() { document.getElementById('quickAddModal').style.display = 'flex'; }
+        function closeQuickAddModal() { document.getElementById('quickAddModal').style.display = 'none'; }
+        function closeDayDetailModal() { document.getElementById('dayDetailModal').style.display = 'none'; }
+
+        function showDayDetails(dateStr, exams, cooking, outings) {
+            document.getElementById('dayDetailDateTitle').innerText = `أنشطة يوم ${dateStr} 📅`;
+            let contentHtml = '';
+
+            if (exams.length > 0) {
+                contentHtml += `<div style="margin-bottom: 6px; font-weight:bold; color:var(--nav-bg);">📚 الامتحانات:</div>`;
+                exams.forEach(e => {
+                    contentHtml += `<div style="background:rgba(239, 68, 68, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid ${e.color};">
+                        <strong>${e.subject}</strong><br><span style="font-size:11px;">المطلوب: ${e.content || 'لا تفاصيل'}</span>
+                    </div>`;
+                });
+            }
+
+            if (cooking.length > 0) {
+                contentHtml += `<div style="margin-bottom: 6px; margin-top:8px; font-weight:bold; color:#e67e22;">🍳 الطبخات:</div>`;
+                cooking.forEach(c => {
+                    contentHtml += `<div style="background:rgba(230, 126, 34, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #e67e22;">
+                        <strong>${c.name}</strong><br><span style="font-size:11px;">المقادير: ${c.ingredients || 'لا تفاصيل'}</span>
+                    </div>`;
+                });
+            }
+
+            if (outings.length > 0) {
+                contentHtml += `<div style="margin-bottom: 6px; margin-top:8px; font-weight:bold; color:#2980b9;">🚗 المشاوير:</div>`;
+                outings.forEach(o => {
+                    contentHtml += `<div style="background:rgba(41, 128, 185, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #2980b9;">
+                        <strong>${o.place}</strong><br><span style="font-size:11px;">ملاحظات: ${o.notes || 'لا تفاصيل'}</span>
+                    </div>`;
+                });
+            }
+
+            if (!contentHtml) {
+                contentHtml = `<p style="text-align:center; opacity:0.7; padding: 10px;">لا توجد أي أنشطة أو امتحانات مسجلة في هذا اليوم ✨</p>`;
+            }
+
+            document.getElementById('dayDetailContent').innerHTML = contentHtml;
+            document.getElementById('dayDetailModal').style.display = 'flex';
+        }
+
+        function scrollToCalendar() {
+            backToHome();
+            document.getElementById('calendarSectionView').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function initCalDropdowns() {
+            let monthSelect = document.getElementById('calMonthSelect');
+            let yearSelect = document.getElementById('calYearSelect');
+
+            monthSelect.innerHTML = monthNames.map((m, idx) => `<option value="${idx}">${m}</option>`).join('');
+            
+            let yearsHTML = '';
+            for (let y = 2026; y <= 2032; y++) {
+                yearsHTML += `<option value="${y}">${y}</option>`;
+            }
+            yearSelect.innerHTML = yearsHTML;
+
+            monthSelect.value = currentCalMonth;
+            yearSelect.value = currentCalYear;
+        }
+
+        function selectGender(gender) {
+            selectedGender = gender;
+            document.getElementById('maleOpt').style.borderColor = gender === 'male' ? 'var(--nav-bg)' : 'var(--border-color)';
+            document.getElementById('femaleOpt').style.borderColor = gender === 'female' ? 'var(--nav-bg)' : 'var(--border-color)';
+            document.body.className = gender === 'male' ? 'theme-male' : 'theme-female';
+
+            if (gender === 'female') {
+                document.getElementById('authSubtitle').innerText = "سجّلي دخولكِ للبدء بتنظيم جدولكِ الذكي 👩";
+                document.getElementById('genderLabel').innerText = "اختاري التصنيف:";
+                document.getElementById('rememberLabel').innerText = "تذكّريني عند العودة مرة أخرى 🔔";
+                document.getElementById('loginBtnText').innerText = "دخول 🚀";
+            } else {
+                document.getElementById('authSubtitle').innerText = "سجّل دخولك للبدء بتنظيم جدولك الذكي 👨";
+                document.getElementById('genderLabel').innerText = "اختر التصنيف:";
+                document.getElementById('rememberLabel').innerText = "تذكّرني عند العودة مرة أخرى 🔔";
+                document.getElementById('loginBtnText').innerText = "دخول 🚀";
+            }
+        }
+
+        function copySiteLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("تم نسخ رابط الموقع بنجاح! 📋✨");
+            });
+        }
+
+        function toggleNightMode() {
+            document.body.classList.toggle('dark-mode');
+            let isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('darkModeToggleBtn').innerHTML = isDark ? '☀️' : '🌙';
+        }
+
+        function registerUser() {
+            let name = document.getElementById('userName').value.trim();
+            let id = document.getElementById('uniqueId').value.trim();
+            let rememberMe = document.getElementById('rememberMeAuth').checked;
+
+            if (!name || !id || !selectedGender) {
+                alert("الرجاء تعبئة كافة الحقول واختيار التصنيف.");
+                return;
+            }
+
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+
+            if (!allUsers[id]) {
+                allUsers[id] = { name: name, gender: selectedGender, exams: [], cooking: [], outings: [], tasks: [], schoolSchedule: null };
+                localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            }
+
+            localStorage.setItem('activeUniversalUser', id);
+            localStorage.setItem('rememberUserFlag', rememberMe ? 'true' : 'false');
+            loadUserSession(id);
+        }
+
+        function loadUserSession(id) {
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let currentUser = allUsers[id];
+
+            if (!currentUser) { logout(); return; }
+
+            document.body.className = currentUser.gender === 'male' ? 'theme-male' : 'theme-female';
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('appScreen').style.display = 'flex';
+
+            let isFemale = currentUser.gender === 'female';
+
+            let msg = isFemale ? 
+                `✨ أهلاً بكِ ${currentUser.name} في موقع نَظِّمْها الذكي &nbsp;•&nbsp; 💡 "النجاح يبدأ بتنظيم خطوتكِ الأولى" &nbsp;•&nbsp; 📚 نسّقي امتحاناتكِ وحصصكِ المدرسية بسهولة!` :
+                `✨ أهلاً بك ${currentUser.name} في موقع نَظِّمْها الذكي &nbsp;•&nbsp; 💡 "النجاح يبدأ بتنظيم خطوتك الأولى" &nbsp;•&nbsp; 📚 نسّق امتحاناتك وحصصك المدرسية بسهولة!`;
+
+            document.getElementById('tickerMsg1').innerHTML = msg;
+            document.getElementById('tickerMsg2').innerHTML = msg;
+
+            document.getElementById('homeSectionViewTitle').innerText = isFemale ? "الأقسام التي يمكنكِ تنظيمها وإدارتها 🤎" : "الأقسام التي يمكنك تنظيمها وإدارتها 🤎";
+            document.getElementById('slide1Btn').innerText = isFemale ? "جربي المساعد الآن 🚀" : "جرب المساعد الآن 🚀";
+            document.getElementById('slide2Btn').innerText = isFemale ? "أنشئي جدولكِ 🖨️" : "أنشئ جدولك 🖨️";
+            document.getElementById('slide3Btn').innerText = isFemale ? "توليد جدولكِ 📖" : "توليد جدولك 📖";
+
+            document.getElementById('navHomeText').innerText = "الرئيسية";
+            document.getElementById('navCalText').innerText = "التقويم";
+            document.getElementById('navGuideText').innerText = "الدليل";
+            document.getElementById('navAccText').innerText = "حسابي";
+
+            document.getElementById('qaExamBtn').innerText = isFemale ? "📚 أضيفي امتحان" : "📚 أضف امتحان";
+            document.getElementById('qaTaskBtn').innerText = isFemale ? "✅ أضيفي مهمة جديدة" : "✅ أضف مهمة جديدة";
+            document.getElementById('qaCookBtn').innerText = isFemale ? "🍳 أضيفي طبخة" : "🍳 أضف طبخة";
+            document.getElementById('qaOutBtn').innerText = isFemale ? "🚗 أضيفي مشوار" : "🚗 أضف مشوار";
+            document.getElementById('qaCancelBtn').innerText = "إلغاء ✖";
+            document.getElementById('quickAddTitle').innerText = isFemale ? "أضيفي نشاطاً سريعاً ✨" : "أضف نشاطاً سريعاً ✨";
+
+            document.getElementById('guideModalBody').innerHTML = isFemale ? `
+                <p><strong>1. التقويم التفاعلي:</strong> يمكنكِ التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقري على أي يوم لعرض كافة تفاصيل امتحاناتكِ وأنشطتكِ المسجلة فيه مرة واحدة.</p>
+                <p><strong>2. قسم الامتحانات:</strong> أضيفي امتحاناتكِ مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
+                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخلي امتحاناتكِ وساعات دراستكِ اليومية لتوليدي خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
+                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 أفقية واحدة متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>5. الإضافة السريعة (➕):</strong> اضغطي الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
+            ` : `
+                <p><strong>1. التقويم التفاعلي:</strong> يمكنك التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقر على أي يوم لعرض كافة تفاصيل امتحاناتك وأنشطتك المسجلة فيه مرة واحدة.</p>
+                <p><strong>2. قسم الامتحانات:</strong> أضف امتحاناتك مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
+                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخل امتحاناتك وساعات دراستك اليومية لتوليد خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
+                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 أفقية واحدة متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>5. الإضافة السريعة (➕):</strong> اضغط الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
+            `;
+
+            document.getElementById('guideModalCloseBtn').innerText = isFemale ? "فهمتُ، ابدئي التنظيم ✨" : "فهمت، ابدأ التنظيم ✨";
+
+            refreshAllData(id);
+        }
+
+        function openSection(sec) {
+            document.getElementById('homeSectionsView').style.display = 'none';
+            ['examsSection', 'studyPlannerSection', 'schoolScheduleSection', 'finalsWizardSection', 'cookingSection', 'outingsSection', 'tasksSection'].forEach(s => {
+                document.getElementById(s).style.display = 'none';
+            });
+            document.getElementById(sec + 'Section').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToHome() {
+            ['examsSection', 'studyPlannerSection', 'schoolScheduleSection', 'finalsWizardSection', 'cookingSection', 'outingsSection', 'tasksSection'].forEach(s => {
+                document.getElementById(s).style.display = 'none';
+            });
+            document.getElementById('homeSectionsView').style.display = 'block';
+            let activeId = localStorage.getItem('activeUniversalUser');
+            if (activeId) refreshAllData(activeId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function refreshAllData(userId) {
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let user = allUsers[userId] || { exams:[], cooking:[], outings:[], tasks:[] };
+
+            displayExams(user.exams);
+            displayCooking(user.cooking);
+            displayOutings(user.outings);
+            displayTasks(user.tasks);
+            buildMasterCalendar(user);
+        }
+
+        function changeMonth(delta) {
+            currentCalMonth += delta;
+            if (currentCalMonth > 11) {
+                currentCalMonth = 0; currentCalYear++;
+            } else if (currentCalMonth < 0) {
+                currentCalMonth = 11; currentCalYear--;
+            }
+            if (currentCalYear < 2026) currentCalYear = 2026;
+
+            document.getElementById('calMonthSelect').value = currentCalMonth;
+            document.getElementById('calYearSelect').value = currentCalYear;
+            
+            let activeId = localStorage.getItem('activeUniversalUser');
+            if (activeId) refreshAllData(activeId);
+        }
+
+        function jumpToMonth() {
+            currentCalMonth = parseInt(document.getElementById('calMonthSelect').value);
+            currentCalYear = parseInt(document.getElementById('calYearSelect').value);
+            let activeId = localStorage.getItem('activeUniversalUser');
+            if (activeId) refreshAllData(activeId);
+        }
+
+        function saveTask() {
+            let editId = document.getElementById('editingTaskId').value;
+            let name = document.getElementById('taskName').value.trim();
+            let notes = document.getElementById('taskNotes').value.trim();
+
+            if (!name) { alert("يرجى إدخال اسم المهمة."); return; }
+
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+
+            if (editId) {
+                let item = allUsers[activeId].tasks.find(t => t.id == editId);
+                if (item) { item.name = name; item.notes = notes; }
+                document.getElementById('editingTaskId').value = '';
+                document.getElementById('taskSubmitBtn').innerText = 'إضافة المهمة 📌';
+            } else {
+                allUsers[activeId].tasks.unshift({ id: Date.now(), name, notes, done: false });
+            }
+
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskNotes').value = '';
+            refreshAllData(activeId);
+        }
+
+        function editTask(id) {
+            openSection('tasks');
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId].tasks.find(t => t.id == id);
+            if (item) {
+                document.getElementById('editingTaskId').value = item.id;
+                document.getElementById('taskName').value = item.name;
+                document.getElementById('taskNotes').value = item.notes;
+                document.getElementById('taskSubmitBtn').innerText = 'حفظ التعديلات 🔄';
+            }
+        }
+
+        function displayTasks(tasks) {
+            let container = document.getElementById('tasksList');
+            if (!tasks || tasks.length === 0) {
+                container.innerHTML = '<p style="text-align: center; opacity: 0.6;">لا توجد مهام مسجلة.</p>';
+                return;
+            }
+            container.innerHTML = tasks.map(t => `
+                <div class="item-card ${t.done ? 'completed' : ''}">
+                    <div class="item-details">
+                        <h3 class="item-title">
+                            ✅ ${t.name}
+                            ${t.done ? '<span class="badge badge-done">مكتملة ✅</span>' : ''}
+                        </h3>
+                        <p>${t.notes || 'لا توجد تفاصيل إضافية'}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-sm btn-done" onclick="toggleDone('tasks', ${t.id})">${t.done ? 'إلغاء' : 'تم ✅'}</button>
+                        <button class="btn-sm btn-edit" onclick="editTask(${t.id})">تعديل ✍️</button>
+                        <button class="btn-sm btn-delete" onclick="deleteItem('tasks', ${t.id})">حذف 🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveExam() {
+            let editId = document.getElementById('editingExamId').value;
+            let subject = document.getElementById('examSubject').value.trim();
+            let color = document.getElementById('examColor').value;
+            let date = document.getElementById('examDate').value;
+            let content = document.getElementById('examContent').value.trim();
+
+            if (!subject || !date) { alert("يرجى ملء كافة البيانات الرئيسية."); return; }
+
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+
+            if (editId) {
+                let item = allUsers[activeId].exams.find(e => e.id == editId);
+                if (item) { item.subject = subject; item.color = color; item.date = date; item.content = content; }
+                document.getElementById('editingExamId').value = '';
+                document.getElementById('examSubmitBtn').innerText = 'إضافة الامتحان ✨';
+            } else {
+                allUsers[activeId].exams.unshift({ id: Date.now(), subject, color, date, content, done: false });
+            }
+
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            document.getElementById('examSubject').value = '';
+            document.getElementById('examDate').value = '';
+            document.getElementById('examContent').value = '';
+            refreshAllData(activeId);
+        }
+
+        function editExam(id) {
+            openSection('exams');
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId].exams.find(e => e.id == id);
+            if (item) {
+                document.getElementById('editingExamId').value = item.id;
+                document.getElementById('examSubject').value = item.subject;
+                document.getElementById('examColor').value = item.color;
+                document.getElementById('examDate').value = item.date;
+                document.getElementById('examContent').value = item.content;
+                document.getElementById('examSubmitBtn').innerText = 'حفظ التعديلات 🔄';
+            }
+        }
+
+        function displayExams(exams) {
+            let container = document.getElementById('examsList');
+            if (!exams || exams.length === 0) {
+                container.innerHTML = '<p style="text-align: center; opacity: 0.6;">لا توجد امتحانات مسجلة.</p>';
+                return;
+            }
+
+            let todayStr = new Date().toISOString().split('T')[0];
+            container.innerHTML = exams.map(ex => {
+                let isExpired = ex.date < todayStr && !ex.done;
+                return `
+                    <div class="item-card ${ex.done ? 'completed' : (isExpired ? 'expired' : '')}" style="border-right-color: ${ex.color};">
+                        <div class="item-details">
+                            <h3 class="item-title">
+                                ${ex.subject}
+                                ${ex.done ? '<span class="badge badge-done">تم الانتهاء ✅</span>' : ''}
+                                ${isExpired ? '<span class="badge badge-expired">نفذ الوقت ⌛</span>' : ''}
+                            </h3>
+                            <p>📅 <strong>التاريخ:</strong> ${ex.date}</p>
+                            <p>📝 <strong>المطلوب:</strong> ${ex.content || 'لا تفاصيل'}</p>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-sm btn-done" onclick="toggleDone('exams', ${ex.id})">${ex.done ? 'إلغاء' : 'تم ✅'}</button>
+                            <button class="btn-sm btn-edit" onclick="editExam(${ex.id})">تعديل ✍️</button>
+                            <button class="btn-sm btn-delete" onclick="deleteItem('exams', ${ex.id})">حذف 🗑️</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleDone(type, id) {
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId][type].find(i => i.id == id);
+            if (item) {
+                item.done = !item.done;
+                localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+                refreshAllData(activeId);
+            }
+        }
+
+        function deleteItem(type, id) {
+            if (!confirm("هل أنت متأكد من الحذف؟")) return;
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            allUsers[activeId][type] = allUsers[activeId][type].filter(i => i.id != id);
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            refreshAllData(activeId);
+        }
+
+        function saveDish() {
+            let editId = document.getElementById('editingDishId').value;
+            let name = document.getElementById('dishName').value.trim();
+            let date = document.getElementById('dishDate').value;
+            let ingredients = document.getElementById('dishIngredients').value.trim();
+
+            if (!name || !date) { alert("يرجى إدخال البيانات الرئيسية للطبخة."); return; }
+
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+
+            if (editId) {
+                let item = allUsers[activeId].cooking.find(c => c.id == editId);
+                if (item) { item.name = name; item.date = date; item.ingredients = ingredients; }
+                document.getElementById('editingDishId').value = '';
+                document.getElementById('dishSubmitBtn').innerText = 'إضافة الطبخة 🍲';
+            } else {
+                allUsers[activeId].cooking.unshift({ id: Date.now(), name, date, ingredients, done: false });
+            }
+
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            document.getElementById('dishName').value = '';
+            document.getElementById('dishDate').value = '';
+            document.getElementById('dishIngredients').value = '';
+            refreshAllData(activeId);
+        }
+
+        function editDish(id) {
+            openSection('cooking');
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId].cooking.find(c => c.id == id);
+            if (item) {
+                document.getElementById('editingDishId').value = item.id;
+                document.getElementById('dishName').value = item.name;
+                document.getElementById('dishDate').value = item.date;
+                document.getElementById('dishIngredients').value = item.ingredients;
+                document.getElementById('dishSubmitBtn').innerText = 'حفظ التعديلات 🔄';
+            }
+        }
+
+        function displayCooking(cooking) {
+            let container = document.getElementById('cookingList');
+            if (!cooking || cooking.length === 0) {
+                container.innerHTML = '<p style="text-align: center; opacity: 0.6;">لا توجد طبخات مسجلة.</p>';
+                return;
+            }
+            container.innerHTML = cooking.map(c => `
+                <div class="item-card ${c.done ? 'completed' : ''}" style="border-right-color: #e67e22;">
+                    <div class="item-details">
+                        <h3 class="item-title">🍳 الطبخة: ${c.name} ${c.done ? '<span class="badge badge-done">تم ✅</span>' : ''}</h3>
+                        <p>📅 <strong>التاريخ:</strong> ${c.date}</p>
+                        <p>🛒 <strong>المقادير:</strong> ${c.ingredients || 'لا توجد'}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-sm btn-done" onclick="toggleDone('cooking', ${c.id})">${c.done ? 'إلغاء' : 'تم ✅'}</button>
+                        <button class="btn-sm btn-edit" onclick="editDish(${c.id})">تعديل ✍️</button>
+                        <button class="btn-sm btn-delete" onclick="deleteItem('cooking', ${c.id})">حذف 🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveOuting() {
+            let editId = document.getElementById('editingOutingId').value;
+            let place = document.getElementById('outingPlace').value.trim();
+            let date = document.getElementById('outingDate').value;
+            let notes = document.getElementById('outingNotes').value.trim();
+
+            if (!place || !date) { alert("يرجى تعبئة مكان وتاريخ المشوار."); return; }
+
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+
+            if (editId) {
+                let item = allUsers[activeId].outings.find(o => o.id == editId);
+                if (item) { item.place = place; item.date = date; item.notes = notes; }
+                document.getElementById('editingOutingId').value = '';
+                document.getElementById('outingSubmitBtn').innerText = 'إضافة المشوار 🗺️';
+            } else {
+                allUsers[activeId].outings.unshift({ id: Date.now(), place, date, notes, done: false });
+            }
+
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            document.getElementById('outingPlace').value = '';
+            document.getElementById('outingDate').value = '';
+            document.getElementById('outingNotes').value = '';
+            refreshAllData(activeId);
+        }
+
+        function editOuting(id) {
+            openSection('outings');
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId].outings.find(o => o.id == id);
+            if (item) {
+                document.getElementById('editingOutingId').value = item.id;
+                document.getElementById('outingPlace').value = item.place;
+                document.getElementById('outingDate').value = item.date;
+                document.getElementById('outingNotes').value = item.notes;
+                document.getElementById('outingSubmitBtn').innerText = 'حفظ التعديلات 🔄';
+            }
+        }
+
+        function displayOutings(outings) {
+            let container = document.getElementById('outingsList');
+            if (!outings || outings.length === 0) {
+                container.innerHTML = '<p style="text-align: center; opacity: 0.6;">لا توجد مشاوير مسجلة.</p>';
+                return;
+            }
+            container.innerHTML = outings.map(o => `
+                <div class="item-card ${o.done ? 'completed' : ''}" style="border-right-color: #2980b9;">
+                    <div class="item-details">
+                        <h3 class="item-title">🚗 المكان: ${o.place} ${o.done ? '<span class="badge badge-done">تم ✅</span>' : ''}</h3>
+                        <p>📅 <strong>الموعد:</strong> ${o.date}</p>
+                        <p>📝 <strong>ملاحظات:</strong> ${o.notes || 'لا توجد'}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-sm btn-done" onclick="toggleDone('outings', ${o.id})">${o.done ? 'إلغاء' : 'تم ✅'}</button>
+                        <button class="btn-sm btn-edit" onclick="editOuting(${o.id})">تعديل ✍️</button>
+                        <button class="btn-sm btn-delete" onclick="deleteItem('outings', ${o.id})">حذف 🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addPlannerRow() {
+            let container = document.getElementById('plannerInputsContainer');
+            let div = document.createElement('div');
+            div.className = 'form-row planner-item-row';
+            div.style.marginBottom = '6px';
+            div.innerHTML = `
+                <input type="text" class="p-subject" placeholder="المادة">
+                <input type="text" class="p-topic" placeholder="الجزء المطلوب">
+                <input type="text" class="p-time" placeholder="الوقت">
+            `;
+            container.appendChild(div);
+        }
+
+        function generateStudySchedule() {
+            let title = document.getElementById('plannerTitle').value.trim() || 'جدول الدراسة الذكي';
+            let rows = document.querySelectorAll('.planner-item-row');
+            
+            let html = `
+                <div id="printableArea" class="printable-container">
+                    <h2 style="text-align: center; margin-bottom: 5px; color: #333;">📖 ${title}</h2>
+                    <p style="text-align: center; font-size: 11px; opacity: 0.8; margin-bottom: 10px;">منصة نَظِّمْها الذكية</p>
+                    <div class="table-responsive-wrapper">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr style="background: var(--nav-bg);">
+                                    <th>#</th>
+                                    <th>المادة</th>
+                                    <th>الموضوع / الجزء المطلوب</th>
+                                    <th>الوقت المخصص</th>
+                                    <th>حالة الإنجاز</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            let count = 0;
+            rows.forEach((r, idx) => {
+                let sub = r.querySelector('.p-subject').value.trim();
+                let topic = r.querySelector('.p-topic').value.trim();
+                let time = r.querySelector('.p-time').value.trim();
+
+                if (sub) {
+                    count++;
+                    html += `
+                        <tr>
+                            <td>${count}</td>
+                            <td style="font-weight:bold;">${sub}</td>
+                            <td>${topic || 'مراجعة شاملة'}</td>
+                            <td>${time || 'ساعة واحدة'}</td>
+                            <td>[ &nbsp; ] تم &nbsp; &nbsp; [ &nbsp; ] قيد الدراسة</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            if (count === 0) { alert("يرجى إدخال مادة واحدة على الأقل."); return; }
+
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <button class="action-btn no-print" onclick="window.print()" style="width: 100%; margin-top: 10px;">طباعة / تنزيل PDF 🖨️</button>
+            `;
+
+            document.getElementById('generatedScheduleOutput').innerHTML = html;
+        }
+
+        function getSelectedDaysList() {
+            let choice = document.getElementById('workDaysSelect').value;
+            if (choice === 'mon-fri') {
+                return ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            } else if (choice === 'sat-wed') {
+                return ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء'];
+            } else {
+                return ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+            }
+        }
+
+        function setupSchoolGrid() {
+            let periods = parseInt(document.getElementById('periodsCount').value);
+            let days = getSelectedDaysList();
+            
+            let html = `<table class="schedule-table-custom">
+                <thead>
+                    <tr>
+                        <th>اليوم / الحصة</th>`;
+            for (let p = 1; p <= periods; p++) html += `<th>الحصة ${p}</th>`;
+            html += `</tr></thead><tbody>`;
+
+            days.forEach((day, dIdx) => {
+                html += `<tr><td class="day-cell">${day}</td>`;
+                for (let p = 1; p <= periods; p++) {
+                    html += `<td><input type="text" class="sch-input" data-day="${dIdx}" data-period="${p}" placeholder="..."></td>`;
+                }
+                html += `</tr>`;
+            });
+            html += `</tbody></table>`;
+
+            document.getElementById('schoolInputsGrid').innerHTML = html;
+            loadSchoolScheduleFromProfile();
+        }
+
+        function saveSchoolScheduleToProfile() {
+            let activeId = localStorage.getItem('activeUniversalUser');
+            if (!activeId) return;
+
+            let periods = parseInt(document.getElementById('periodsCount').value);
+            let workDays = document.getElementById('workDaysSelect').value;
+            let days = getSelectedDaysList();
+            let quoteText = document.getElementById('customQuoteTextarea').value.trim();
+            let grade = document.getElementById('studentGradeInput').value.trim();
+            let section = document.getElementById('studentSectionInput').value.trim();
+            let term = document.getElementById('studentTermInput').value.trim();
+
+            let scheduleData = {
+                periods: periods,
+                workDays: workDays,
+                quote: quoteText,
+                grade: grade,
+                section: section,
+                term: term,
+                headerColor: document.getElementById('colorHeader').value,
+                dayBgColor: document.getElementById('colorDayBg').value,
+                mainBorderColor: document.getElementById('colorMainBorder').value,
+                cells: {}
+            };
+
+            days.forEach((day, dIdx) => {
+                for (let p = 1; p <= periods; p++) {
+                    let input = document.querySelector(`.sch-input[data-day="${dIdx}"][data-period="${p}"]`);
+                    if (input && input.value.trim()) {
+                        scheduleData.cells[`${dIdx}_${p}`] = input.value.trim();
+                    }
+                }
+            });
+
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            if (allUsers[activeId]) {
+                allUsers[activeId].schoolSchedule = scheduleData;
+                localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+                alert("تم حفظ جدول الحصص والتصميم بنجاح! 💾✨");
+            }
+        }
+
+        function loadSchoolScheduleFromProfile() {
+            let activeId = localStorage.getItem('activeUniversalUser');
+            if (!activeId) return;
+
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let user = allUsers[activeId];
+            if (!user || !user.schoolSchedule) return;
+
+            let sch = user.schoolSchedule;
+            if (sch.workDays) document.getElementById('workDaysSelect').value = sch.workDays;
+            if (sch.periods) document.getElementById('periodsCount').value = sch.periods;
+            if (sch.quote) document.getElementById('customQuoteTextarea').value = sch.quote;
+            if (sch.grade) document.getElementById('studentGradeInput').value = sch.grade;
+            if (sch.section) document.getElementById('studentSectionInput').value = sch.section;
+            if (sch.term) document.getElementById('studentTermInput').value = sch.term;
+
+            if (sch.headerColor) document.getElementById('colorHeader').value = sch.headerColor;
+            if (sch.dayBgColor) document.getElementById('colorDayBg').value = sch.dayBgColor;
+            if (sch.mainBorderColor) document.getElementById('colorMainBorder').value = sch.mainBorderColor;
+            updateCustomColors();
+
+            if (sch.cells) {
+                for (let key in sch.cells) {
+                    let parts = key.split('_');
+                    let dIdx = parts[0];
+                    let p = parts[1];
+                    let input = document.querySelector(`.sch-input[data-day="${dIdx}"][data-period="${p}"]`);
+                    if (input) {
+                        input.value = sch.cells[key];
+                    }
+                }
+            }
+        }
+
+        function addWizardRow() {
+            let container = document.getElementById('wizardSubjectsContainer');
+            let div = document.createElement('div');
+            div.className = 'form-row wizard-sub-row';
+            div.style.marginBottom = '6px';
+            div.innerHTML = `
+                <input type="text" class="w-sub-name" placeholder="المادة">
+                <input type="number" class="w-sub-days" placeholder="أيام الدراسة" value="2">
+                <input type="date" class="w-sub-date" placeholder="تاريخ الامتحان">
+            `;
+            container.appendChild(div);
+        }
+
+        function generateFinalsPlan() {
+            let dailyHours = document.getElementById('wizardDailyHours').value;
+            let startTime = document.getElementById('wizardStartTime').value;
+            let notes = document.getElementById('wizardNotes').value.trim();
+            let rows = document.querySelectorAll('.wizard-sub-row');
+
+            let planHtml = `
+                <div id="printableArea" class="printable-container" style="border-color: var(--nav-bg);">
+                    <h2 style="text-align: center; color: var(--nav-bg); margin-bottom: 5px;">🎯 الخطة الدراسية الذكية للفاينل</h2>
+                    <p style="font-size: 11px; text-align: center; margin-bottom: 10px;">معدل الدراسة اليومي: <strong>${dailyHours} ساعات</strong> يبدأ من الساعة <strong>${startTime}</strong></p>
+            `;
+
+            if (notes) {
+                planHtml += `<div style="background: #fff8f0; padding: 6px; border-radius: 6px; border: 1px solid #e7bc91; font-size: 11px; margin-bottom: 10px;">📌 <strong>ملاحظات الدراسة:</strong> ${notes}</div>`;
+            }
+
+            planHtml += `
+                <div class="table-responsive-wrapper">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr style="background: var(--nav-bg);">
+                                <th>المادة</th>
+                                <th>تاريخ الامتحان</th>
+                                <th>أيام الدراسة المقترحة</th>
+                                <th>توزيع الوقت اليومي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            let count = 0;
+            rows.forEach(r => {
+                let name = r.querySelector('.w-sub-name').value.trim();
+                let days = r.querySelector('.w-sub-days').value || 1;
+                let date = r.querySelector('.w-sub-date').value || 'غير محدد';
+
+                if (name) {
+                    count++;
+                    planHtml += `
+                        <tr>
+                            <td style="font-weight:bold; color:var(--nav-bg);">${name}</td>
+                            <td>${date}</td>
+                            <td>${days} يوم/أيام قبل الامتحان</td>
+                            <td>جلسة ${dailyHours / 2} ساعة ⬅ راحة 30 دقيقة ⬅ جلسة ${dailyHours / 2} ساعة</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            if (count === 0) { alert("يرجى إدخال مادة واحدة على الأقل."); return; }
+
+            planHtml += `
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                <button class="action-btn no-print" onclick="window.print()" style="width: 100%; margin-top: 10px;">طباعة خطة الفاينل 🖨️</button>
+            `;
+
+            document.getElementById('finalsPlanOutput').innerHTML = planHtml;
+        }
+
+        function buildMasterCalendar(user) {
+            let grid = document.getElementById('masterCalendarGrid');
+            let daysNames = ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'];
+            let html = daysNames.map(d => `<div class="calendar-day-name">${d}</div>`).join('');
+
+            let firstDay = new Date(currentCalYear, currentCalMonth, 1).getDay();
+            let totalDays = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                html += `<div class="calendar-cell" style="opacity: 0.3; pointer-events: none;"></div>`;
+            }
+
+            for (let day = 1; day <= totalDays; day++) {
+                let dayFormatted = day < 10 ? '0' + day : day;
+                let monthFormatted = (currentCalMonth + 1) < 10 ? '0' + (currentCalMonth + 1) : (currentCalMonth + 1);
+                let dateStr = `${currentCalYear}-${monthFormatted}-${dayFormatted}`;
+
+                let dayExams = user.exams.filter(e => e.date === dateStr);
+                let dayCooking = user.cooking.filter(c => c.date === dateStr);
+                let dayOutings = user.outings.filter(o => o.date === dateStr);
+
+                let hasExam = dayExams.length > 0;
+                let evHTML = '';
+
+                if (hasExam) evHTML += `<div class="day-status-indicator status-exam">امتحان 📚</div>`;
+
+                dayExams.forEach(m => evHTML += `<div class="calendar-event" style="background:${m.color};">📚 ${m.subject}</div>`);
+                dayCooking.forEach(c => evHTML += `<div class="calendar-event" style="background:#e67e22;">🍳 ${c.name}</div>`);
+                dayOutings.forEach(o => evHTML += `<div class="calendar-event" style="background:#2980b9;">🚗 ${o.place}</div>`);
+
+                let examsJSON = JSON.stringify(dayExams).replace(/"/g, '&quot;');
+                let cookingJSON = JSON.stringify(dayCooking).replace(/"/g, '&quot;');
+                let outingsJSON = JSON.stringify(dayOutings).replace(/"/g, '&quot;');
+
+                html += `
+                    <div class="calendar-cell ${hasExam ? 'has-exam' : ''}" onclick="showDayDetails('${dateStr}', ${examsJSON}, ${cookingJSON}, ${outingsJSON})">
+                        <span class="day-num">${day}</span>
+                        ${evHTML}
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+
+            let tasksContainer = document.getElementById('homeTasksList');
+            if (!user.tasks || user.tasks.length === 0) {
+                tasksContainer.innerHTML = '<p style="text-align: center; opacity: 0.6; font-size: 12px;">لا توجد مهام حالياً.</p>';
+            } else {
+                tasksContainer.innerHTML = user.tasks.map(t => `
+                    <div class="item-card ${t.done ? 'completed' : ''}">
+                        <div class="item-details">
+                            <h3 class="item-title">✅ ${t.name} ${t.done ? '<span class="badge badge-done">مكتملة ✅</span>' : ''}</h3>
+                            <p>${t.notes || ''}</p>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-sm btn-done" onclick="toggleDone('tasks', ${t.id})">${t.done ? 'إلغاء' : 'تم ✅'}</button>
+                            <button class="btn-sm btn-edit" onclick="editTask(${t.id})">تعديل ✍️</button>
+                            <button class="btn-sm btn-delete" onclick="deleteItem('tasks', ${t.id})">حذف 🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('rememberUserFlag');
+            localStorage.removeItem('activeUniversalUser');
+            document.getElementById('appScreen').style.display = 'none';
+            document.getElementById('authScreen').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
