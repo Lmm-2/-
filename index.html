@@ -75,7 +75,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding-bottom: 75px;
+            padding-bottom: 90px;
             transition: all 0.3s ease;
             overflow-x: hidden;
         }
@@ -150,7 +150,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             padding: 12px;
             display: flex;
@@ -243,13 +243,22 @@
 
         input, select, textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px;
             margin-bottom: 10px;
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: 10px;
             font-size: 13px;
             outline: none;
             background: var(--input-bg);
+            color: var(--text-color);
+            position: relative;
+            z-index: 10;
+        }
+
+        select option {
+            padding: 12px;
+            font-size: 14px;
+            background: var(--card-bg);
             color: var(--text-color);
         }
 
@@ -270,8 +279,8 @@
             gap: 6px;
         }
 
-        .form-row { display: flex; gap: 8px; }
-        .form-row > * { flex: 1; }
+        .form-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .form-row > * { flex: 1; min-width: 120px; }
 
         .sections-grid {
             display: grid;
@@ -439,7 +448,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
         }
 
         .printable-sheet-wrapper::before {
@@ -462,7 +471,7 @@
             color: white;
             padding: 6px 35px;
             border-radius: 20px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
@@ -472,7 +481,7 @@
             justify-content: space-around;
             background: var(--custom-soft-bg);
             border: 1.5px solid var(--custom-border);
-            padding: 8px 10px;
+            padding: 6px 10px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
@@ -486,7 +495,7 @@
             font-size: 11px;
             font-weight: 700;
             color: var(--text-color);
-            width: 100px;
+            width: 110px;
             text-align: center;
             outline: none;
             padding: 1px;
@@ -497,13 +506,14 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
+            min-width: 600px;
             border-radius: 8px;
             overflow: hidden;
         }
 
         .schedule-table-custom th, .schedule-table-custom td {
             border: 1.5px solid var(--custom-border);
-            padding: 8px 4px;
+            padding: 6px 3px;
             text-align: center;
             vertical-align: middle;
         }
@@ -511,7 +521,7 @@
         .schedule-table-custom th {
             background-color: var(--custom-table-header) !important;
             color: white !important;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 800;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
@@ -521,8 +531,8 @@
             background-color: var(--custom-day-bg) !important;
             font-weight: 800;
             color: var(--custom-table-header);
-            font-size: 13px;
-            width: 14%;
+            font-size: 12px;
+            width: 11%;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }
@@ -532,7 +542,7 @@
             border: none;
             background: transparent;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #4a2830;
             outline: none;
@@ -541,25 +551,25 @@
         .sheet-bottom-simple {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .quote-banner-box {
             background: var(--custom-soft-bg);
             border: 1.5px dashed var(--custom-light);
             border-radius: 8px;
-            padding: 8px 10px;
+            padding: 6px 10px;
             text-align: center;
         }
 
         .quote-banner-box textarea {
             width: 100%;
-            height: 36px;
+            height: 30px;
             border: none;
             background: transparent;
             color: var(--custom-main);
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             resize: none;
             outline: none;
@@ -571,41 +581,38 @@
             background: #fff9fb;
             border: 1.5px solid var(--custom-border);
             border-radius: 8px;
-            padding: 10px 12px;
+            padding: 6px 10px;
         }
 
         .notes-print-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             color: var(--custom-main);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .notes-blank-lines {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .blank-line {
             border-bottom: 1.5px dashed var(--custom-light);
-            height: 18px;
+            height: 14px;
         }
 
         .sheet-footer {
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             color: var(--custom-main);
-            padding-top: 4px;
+            padding-top: 2px;
         }
 
-        /* ------------------------------------------------------------- */
-        /* إعدادات طباعة بالطول A4 Portrait شائعة وموثوقة */
-        /* ------------------------------------------------------------- */
         @page {
-            size: A4 portrait;
-            margin: 0;
+            size: A4 landscape;
+            margin: 5mm;
         }
 
         @media print {
@@ -614,12 +621,12 @@
             }
 
             html, body {
-                width: 210mm !important;
-                height: 297mm !important;
+                width: 100% !important;
+                height: 100% !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
-                overflow: hidden !important;
+                overflow: visible !important;
             }
 
             body {
@@ -637,23 +644,10 @@
             }
 
             #printableSheetArea {
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 210mm !important;
-                height: 297mm !important;
-                max-width: 210mm !important;
-                max-height: 297mm !important;
-                margin: 0 !important;
-                padding: 12mm 15mm !important;
-                box-sizing: border-box !important;
-                border: 4px solid var(--custom-main) !important;
-                border-radius: 0 !important;
                 box-shadow: none !important;
                 background: #ffffff !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
+                padding: 8mm 10mm !important;
+                border: 3.5px solid var(--custom-main) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -661,25 +655,15 @@
             .schedule-table-custom {
                 min-width: 100% !important;
                 width: 100% !important;
-                margin: 6px 0 !important;
             }
 
-            .schedule-table-custom th {
-                padding: 8px 4px !important;
-                font-size: 11px !important;
+            .schedule-table-custom th, .schedule-table-custom td {
+                padding: 5px 2px !important;
+                font-size: 10px !important;
             }
 
-            .schedule-table-custom td {
-                padding: 10px 4px !important;
-                font-size: 11px !important;
-            }
-
-            .notes-blank-lines {
-                gap: 12px !important;
-            }
-
-            .blank-line {
-                height: 24px !important;
+            .schedule-table-custom td input {
+                font-size: 10px !important;
             }
         }
 
@@ -694,7 +678,7 @@
             justify-content: space-around;
             align-items: center;
             padding: 8px 0;
-            z-index: 999;
+            z-index: 90;
             box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
         }
 
@@ -827,8 +811,8 @@
                     </div>
 
                     <div class="banner-slide" id="slide2">
-                        <h3>🗓️ جدول الحصص المدرسية</h3>
-                        <p id="slide2Desc">أدخلي أيام دوامك وحصصك واختاري الألوان والتصاميم المخصصة للطباعة!</p>
+                        <h3>🗓️ جدول الحصص السنوي</h3>
+                        <p id="slide2Desc">أدخلي أيام دوامك وحصصك والفسح واختاري الألوان المخصصة للطباعة!</p>
                         <button class="banner-btn" onclick="openSection('schoolSchedule')" id="slide2Btn">إنشاء الجدول 🖨️</button>
                     </div>
 
@@ -859,7 +843,7 @@
                         </div>
                         <div class="section-box" onclick="openSection('schoolSchedule')">
                             <span style="font-size: 22px;">🗓️</span>
-                            <h3>جدول الحصص</h3>
+                            <h3>جدول الحصص السنوي</h3>
                         </div>
                         <div class="section-box" onclick="openSection('finalsWizard')">
                             <span style="font-size: 22px;">⚡</span>
@@ -946,10 +930,10 @@
                 <div id="generatedScheduleOutput"></div>
             </div>
 
-            <!-- 3. جدول الحصص المدرسية -->
+            <!-- 3. جدول الحصص المدرسي السنوي -->
             <div id="schoolScheduleSection" style="display: none;" class="card">
                 <button class="back-nav-btn no-print" onclick="backToHome()">⬅ العودة للرئيسية</button>
-                <h2 class="no-print">🗓️ جدول الحصص المدرسية (مخصص بالكامل)</h2>
+                <h2 class="no-print">🗓️ جدول الحصص المدرسية السنوي (مخصص بالكامل)</h2>
                 
                 <div class="no-print" style="background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
                     <div class="form-row" style="margin-bottom: 8px;">
@@ -957,18 +941,57 @@
                             <label style="font-size: 11px; font-weight: bold;">أيام الدوام:</label>
                             <select id="workDaysSelect" onchange="setupSchoolGrid()">
                                 <option value="sun-thu">من الأحد إلى الخميس</option>
-                                <option value="mon-fri">من الإثنين إلى الجمعة</option>
+                                <option value="mon-fri" selected>من الإثنين إلى الجمعة</option>
                                 <option value="sat-wed">من السبت إلى الأربعاء</option>
                             </select>
                         </div>
                         <div>
                             <label style="font-size: 11px; font-weight: bold;">عدد الحصص:</label>
-                            <select id="periodsCount" onchange="setupSchoolGrid()">
-                                <option value="5">5 حصص</option>
-                                <option value="6" selected>6 حصص</option>
+                            <!-- خيار 8 حصص وكل الخيارات متاحة تماماً -->
+                            <select id="periodsCount" onchange="toggleBreakControls()">
+                                <option value="6">6 حصص</option>
                                 <option value="7">7 حصص</option>
-                                <option value="8">8 حصص</option>
+                                <option value="8" selected>8 حصص</option>
+                                <option value="9">9 حصص</option>
+                                <option value="10">10 حصص</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- إعدادات الفسحة المدرسية -->
+                    <div style="border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 8px; margin-bottom: 8px;">
+                        <label style="font-size: 12px; font-weight: 800; color: var(--nav-bg); display: block; margin-bottom: 6px;">🥪 إعدادات الفسحة المدرسية:</label>
+                        <div class="form-row" style="margin-bottom: 6px;">
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">عدد الفسح:</label>
+                                <select id="breaksCountSelect" onchange="toggleBreakControls()">
+                                    <option value="0">بدون فسحة</option>
+                                    <option value="1" selected>فسحة واحدة</option>
+                                    <option value="2">فسحتين</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="break1ControlRow" class="form-row" style="margin-bottom: 6px;">
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">الفسحة الأولى بعد الحصة:</label>
+                                <select id="break1AfterSelect" onchange="setupSchoolGrid()"></select>
+                            </div>
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">مدة الفسحة الأولى:</label>
+                                <input type="text" id="break1DurationInput" value="30 دقيقة" onchange="setupSchoolGrid()">
+                            </div>
+                        </div>
+
+                        <div id="break2ControlRow" class="form-row" style="display:none; margin-bottom: 6px;">
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">الفسحة الثانية بعد الحصة:</label>
+                                <select id="break2AfterSelect" onchange="setupSchoolGrid()"></select>
+                            </div>
+                            <div>
+                                <label style="font-size: 10px; font-weight: bold;">مدة الفسحة الثانية:</label>
+                                <input type="text" id="break2DurationInput" value="20 دقيقة" onchange="setupSchoolGrid()">
+                            </div>
                         </div>
                     </div>
 
@@ -1000,18 +1023,18 @@
                         </select>
                     </div>
 
-                    <button class="action-btn" onclick="saveSchoolScheduleToProfile()" style="background: var(--accent-green); width: 100%;">حفظ الجدول في الحساب 💾</button>
+                    <button class="action-btn" onclick="saveSchoolScheduleToProfile()" style="background: var(--accent-green); width: 100%;">حفظ الجدول السنوي في الحساب 💾</button>
                 </div>
 
                 <div id="printableSheetArea" class="printable-sheet-wrapper">
                     <div class="sheet-header">
-                        <div class="sheet-title">✨ جدول الحصص المدرسية ✨</div>
+                        <div class="sheet-title">✨ جدول الحصص المدرسي السنوي ✨</div>
                     </div>
 
                     <div class="student-info-bar">
                         <div class="info-item">الصف: <input type="text" id="studentGradeInput" placeholder="مثال: الحادي عشر"></div>
                         <div class="info-item">الشعبة: <input type="text" id="studentSectionInput" placeholder="مثال: 1"></div>
-                        <div class="info-item">الفصل: <input type="text" id="studentTermInput" placeholder="الأول / الثاني"></div>
+                        <div class="info-item">السنة الدراسية: <input type="text" id="studentYearInput" placeholder="مثال: 2026/2027"></div>
                     </div>
 
                     <div id="schoolInputsGrid" style="width: 100%;"></div>
@@ -1022,9 +1045,8 @@
                         </div>
 
                         <div class="notes-print-area">
-                            <div class="notes-print-title">📌 أهداف وملاحظات الفصل الدراسي:</div>
+                            <div class="notes-print-title">📌 أهداف وملاحظات السنة الدراسية:</div>
                             <div class="notes-blank-lines">
-                                <div class="blank-line"></div>
                                 <div class="blank-line"></div>
                                 <div class="blank-line"></div>
                             </div>
@@ -1037,7 +1059,7 @@
                 </div>
 
                 <div class="no-print" style="margin-top: 15px; text-align: center;">
-                    <button class="action-btn" onclick="window.print()" style="padding: 12px 30px; font-size: 15px;">طباعة الجدول بصفحة A4 طولية واحدة 🖨️✨</button>
+                    <button class="action-btn" onclick="window.print()" style="padding: 12px 30px; font-size: 15px;">طباعة الجدول بصفحة A4 عرضية 🖨️✨</button>
                 </div>
             </div>
 
@@ -1161,6 +1183,19 @@
     <div id="dayDetailModal" class="modal-overlay no-print">
         <div class="popup-card">
             <h3 style="color: var(--nav-bg); margin-bottom: 12px; text-align: center;" id="dayDetailDateTitle">أنشطة اليوم 📅</h3>
+            
+            <div id="calendarEditInlineArea" style="display:none; background: var(--input-bg); padding: 10px; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--border-color);">
+                <input type="hidden" id="calEditType" value="">
+                <input type="hidden" id="calEditId" value="">
+                <input type="text" id="calEditTitle" placeholder="العنوان أو اسم المادة...">
+                <input type="date" id="calEditDate" style="display:none;">
+                <textarea id="calEditDesc" placeholder="التفاصيل والمطلوب..."></textarea>
+                <div style="display:flex; gap:6px;">
+                    <button class="action-btn" onclick="saveCalendarInlineEdit()" style="flex:1; background: var(--accent-green); font-size:11px;">حفظ التعديل ✅</button>
+                    <button class="action-btn" onclick="cancelCalendarInlineEdit()" style="flex:1; background: #6b7280; font-size:11px;">إلغاء ✖</button>
+                </div>
+            </div>
+
             <div id="dayDetailContent" style="font-size: 13px; line-height: 1.6; margin-bottom: 14px;"></div>
             <button class="action-btn" onclick="closeDayDetailModal()" style="width: 100%;" id="closeDayModalBtn">إغلاق ✖</button>
         </div>
@@ -1194,6 +1229,7 @@
         let currentCalYear = 2026;
         let currentCalMonth = 9;
         let currentSlide = 0;
+        let lastActiveDateStr = '';
 
         const monthNames = [
             "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
@@ -1217,7 +1253,7 @@
             } else {
                 document.getElementById('authScreen').style.display = 'flex';
             }
-            setupSchoolGrid();
+            toggleBreakControls();
         };
 
         function updateCustomColors() {
@@ -1261,35 +1297,59 @@
         function closeGuideModal() { document.getElementById('guideModal').style.display = 'none'; }
         function openQuickAddModal() { document.getElementById('quickAddModal').style.display = 'flex'; }
         function closeQuickAddModal() { document.getElementById('quickAddModal').style.display = 'none'; }
-        function closeDayDetailModal() { document.getElementById('dayDetailModal').style.display = 'none'; }
+        function closeDayDetailModal() { 
+            document.getElementById('dayDetailModal').style.display = 'none'; 
+            cancelCalendarInlineEdit();
+        }
 
-        function showDayDetails(dateStr, exams, cooking, outings) {
+        function showDayDetails(dateStr) {
+            lastActiveDateStr = dateStr;
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let user = allUsers[activeId] || { exams:[], cooking:[], outings:[], tasks:[] };
+
+            let dayExams = user.exams.filter(e => e.date === dateStr);
+            let dayCooking = user.cooking.filter(c => c.date === dateStr);
+            let dayOutings = user.outings.filter(o => o.date === dateStr);
+
             document.getElementById('dayDetailDateTitle').innerText = `أنشطة يوم ${dateStr} 📅`;
             let contentHtml = '';
 
-            if (exams.length > 0) {
+            if (dayExams.length > 0) {
                 contentHtml += `<div style="margin-bottom: 6px; font-weight:bold; color:var(--nav-bg);">📚 الامتحانات:</div>`;
-                exams.forEach(e => {
-                    contentHtml += `<div style="background:rgba(239, 68, 68, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid ${e.color};">
-                        <strong>${e.subject}</strong><br><span style="font-size:11px;">المطلوب: ${e.content || 'لا تفاصيل'}</span>
+                dayExams.forEach(e => {
+                    contentHtml += `<div style="background:rgba(239, 68, 68, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid ${e.color}; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong>${e.subject}</strong><br><span style="font-size:11px;">المطلوب: ${e.content || 'لا تفاصيل'}</span></div>
+                        <div style="display:flex; gap:4px;">
+                            <button class="btn-sm btn-edit" onclick="openCalendarInlineEdit('exams', ${e.id})">تعديل ✍️</button>
+                            <button class="btn-sm btn-delete" onclick="deleteFromCalendar('exams', ${e.id})">حذف 🗑️</button>
+                        </div>
                     </div>`;
                 });
             }
 
-            if (cooking.length > 0) {
+            if (dayCooking.length > 0) {
                 contentHtml += `<div style="margin-bottom: 6px; margin-top:8px; font-weight:bold; color:#e67e22;">🍳 الطبخات:</div>`;
-                cooking.forEach(c => {
-                    contentHtml += `<div style="background:rgba(230, 126, 34, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #e67e22;">
-                        <strong>${c.name}</strong><br><span style="font-size:11px;">المقادير: ${c.ingredients || 'لا تفاصيل'}</span>
+                dayCooking.forEach(c => {
+                    contentHtml += `<div style="background:rgba(230, 126, 34, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #e67e22; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong>${c.name}</strong><br><span style="font-size:11px;">المقادير: ${c.ingredients || 'لا تفاصيل'}</span></div>
+                        <div style="display:flex; gap:4px;">
+                            <button class="btn-sm btn-edit" onclick="openCalendarInlineEdit('cooking', ${c.id})">تعديل ✍️</button>
+                            <button class="btn-sm btn-delete" onclick="deleteFromCalendar('cooking', ${c.id})">حذف 🗑️</button>
+                        </div>
                     </div>`;
                 });
             }
 
-            if (outings.length > 0) {
+            if (dayOutings.length > 0) {
                 contentHtml += `<div style="margin-bottom: 6px; margin-top:8px; font-weight:bold; color:#2980b9;">🚗 المشاوير:</div>`;
-                outings.forEach(o => {
-                    contentHtml += `<div style="background:rgba(41, 128, 185, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #2980b9;">
-                        <strong>${o.place}</strong><br><span style="font-size:11px;">ملاحظات: ${o.notes || 'لا تفاصيل'}</span>
+                dayOutings.forEach(o => {
+                    contentHtml += `<div style="background:rgba(41, 128, 185, 0.08); padding:6px; border-radius:6px; margin-bottom:6px; border-right:3px solid #2980b9; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong>${o.place}</strong><br><span style="font-size:11px;">ملاحظات: ${o.notes || 'لا تفاصيل'}</span></div>
+                        <div style="display:flex; gap:4px;">
+                            <button class="btn-sm btn-edit" onclick="openCalendarInlineEdit('outings', ${o.id})">تعديل ✍️</button>
+                            <button class="btn-sm btn-delete" onclick="deleteFromCalendar('outings', ${o.id})">حذف 🗑️</button>
+                        </div>
                     </div>`;
                 });
             }
@@ -1300,6 +1360,63 @@
 
             document.getElementById('dayDetailContent').innerHTML = contentHtml;
             document.getElementById('dayDetailModal').style.display = 'flex';
+        }
+
+        function openCalendarInlineEdit(type, id) {
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId][type].find(i => i.id == id);
+            if (!item) return;
+
+            document.getElementById('calEditType').value = type;
+            document.getElementById('calEditId').value = id;
+            document.getElementById('calEditTitle').value = item.subject || item.name || item.place || '';
+            document.getElementById('calEditDesc').value = item.content || item.ingredients || item.notes || '';
+            document.getElementById('calEditDate').value = item.date;
+
+            document.getElementById('calendarEditInlineArea').style.display = 'block';
+        }
+
+        function cancelCalendarInlineEdit() {
+            document.getElementById('calendarEditInlineArea').style.display = 'none';
+            document.getElementById('calEditType').value = '';
+            document.getElementById('calEditId').value = '';
+            document.getElementById('calEditTitle').value = '';
+            document.getElementById('calEditDesc').value = '';
+        }
+
+        function saveCalendarInlineEdit() {
+            let type = document.getElementById('calEditType').value;
+            let id = document.getElementById('calEditId').value;
+            let title = document.getElementById('calEditTitle').value.trim();
+            let desc = document.getElementById('calEditDesc').value.trim();
+
+            if (!title) { alert("يرجى إدخال العنوان."); return; }
+
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            let item = allUsers[activeId][type].find(i => i.id == id);
+
+            if (item) {
+                if (type === 'exams') { item.subject = title; item.content = desc; }
+                else if (type === 'cooking') { item.name = title; item.ingredients = desc; }
+                else if (type === 'outings') { item.place = title; item.notes = desc; }
+
+                localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+                refreshAllData(activeId);
+                cancelCalendarInlineEdit();
+                showDayDetails(lastActiveDateStr);
+            }
+        }
+
+        function deleteFromCalendar(type, id) {
+            if (!confirm("هل أنت متأكد من الحذف؟")) return;
+            let activeId = localStorage.getItem('activeUniversalUser');
+            let allUsers = JSON.parse(localStorage.getItem('allUniversalUsersDB')) || {};
+            allUsers[activeId][type] = allUsers[activeId][type].filter(i => i.id != id);
+            localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
+            refreshAllData(activeId);
+            showDayDetails(lastActiveDateStr);
         }
 
         function scrollToCalendar() {
@@ -1360,7 +1477,7 @@
             let rememberMe = document.getElementById('rememberMeAuth').checked;
 
             if (!name || !id || !selectedGender) {
-                alert("الرجاء تعبئة كافة الحقول وااختيار التصنيف.");
+                alert("الرجاء تعبئة كافة الحقول واختيار التصنيف.");
                 return;
             }
 
@@ -1413,16 +1530,16 @@
             document.getElementById('quickAddTitle').innerText = isFemale ? "أضيفي نشاطاً سريعاً ✨" : "أضف نشاطاً سريعاً ✨";
 
             document.getElementById('guideModalBody').innerHTML = isFemale ? `
-                <p><strong>1. التقويم التفاعلي:</strong> يمكنكِ التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقري على أي يوم لعرض كافة تفاصيل امتحاناتكِ وأنشطتكِ المسجلة فيه مرة واحدة.</p>
+                <p><strong>1. التقويم التفاعلي:</strong> انقري على أي يوم لعرض أنشطته، ويمكنكِ تعديل أو حذف أي امتحان أو مشوار مباشرة من نافذة التقويم ليتم تحديثه في كل مكان!</p>
                 <p><strong>2. قسم الامتحانات:</strong> أضيفي امتحاناتكِ مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
-                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخلي امتحاناتكِ وساعات دراستكِ اليومية لتوليدي خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
-                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 طولية متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخلي امتحاناتكِ وساعات دراستكِ اليومية لتوليدي خطة دراسية متوازنة للفاينل.</p>
+                <p><strong>4. جدول الحصص السنوي:</strong> جدول عرضي مخصص للعام الدراسي الكامل.</p>
                 <p><strong>5. الإضافة السريعة (➕):</strong> اضغطي الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
             ` : `
-                <p><strong>1. التقويم التفاعلي:</strong> يمكنك التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقر على أي يوم لعرض كافة تفاصيل امتحاناتك وأنشطتك المسجلة فيه مرة واحدة.</p>
+                <p><strong>1. التقويم التفاعلي:</strong> انقر على أي يوم لعرض أنشطته، ويمكنك تعديل أو حذف أي امتحان أو مشوار مباشرة من نافذة التقويم ليتم تحديثه في كل مكان!</p>
                 <p><strong>2. قسم الامتحانات:</strong> أضف امتحاناتك مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
-                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخل امتحاناتك وساعات دراستك اليومية لتوليد خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
-                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 طولية متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>3. مساعد الفاينل الذكي:</strong> أدخل امتحاناتك وساعات دراستك اليومية لتوليد خطة دراسية متوازنة للفاينل.</p>
+                <p><strong>4. جدول الحصص السنوي:</strong> جدول عرضي مخصص للعام الدراسي الكامل.</p>
                 <p><strong>5. الإضافة السريعة (➕):</strong> اضغط الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
             `;
 
@@ -1845,21 +1962,67 @@
             }
         }
 
+        function toggleBreakControls() {
+            let periods = parseInt(document.getElementById('periodsCount').value);
+            let breaksCount = parseInt(document.getElementById('breaksCountSelect').value);
+
+            let b1Row = document.getElementById('break1ControlRow');
+            let b2Row = document.getElementById('break2ControlRow');
+
+            let b1Select = document.getElementById('break1AfterSelect');
+            let b2Select = document.getElementById('break2AfterSelect');
+
+            let opts = '';
+            for (let i = 1; i < periods; i++) {
+                opts += `<option value="${i}">بعد الحصة ${i}</option>`;
+            }
+
+            b1Select.innerHTML = opts;
+            b2Select.innerHTML = opts;
+
+            if (periods >= 6 && b1Select.options.length >= 2) b1Select.value = "2";
+            if (periods >= 7 && b2Select.options.length >= 5) b2Select.value = "5";
+
+            b1Row.style.display = breaksCount >= 1 ? 'flex' : 'none';
+            b2Row.style.display = breaksCount >= 2 ? 'flex' : 'none';
+
+            setupSchoolGrid();
+        }
+
         function setupSchoolGrid() {
             let periods = parseInt(document.getElementById('periodsCount').value);
             let days = getSelectedDaysList();
+            let breaksCount = parseInt(document.getElementById('breaksCountSelect').value);
             
+            let b1After = breaksCount >= 1 ? parseInt(document.getElementById('break1AfterSelect').value) : 0;
+            let b1Dur = breaksCount >= 1 ? document.getElementById('break1DurationInput').value.trim() : '';
+
+            let b2After = breaksCount >= 2 ? parseInt(document.getElementById('break2AfterSelect').value) : 0;
+            let b2Dur = breaksCount >= 2 ? document.getElementById('break2DurationInput').value.trim() : '';
+
             let html = `<table class="schedule-table-custom">
                 <thead>
                     <tr>
                         <th>اليوم / الحصة</th>`;
-            for (let p = 1; p <= periods; p++) html += `<th>الحصة ${p}</th>`;
+            
+            for (let p = 1; p <= periods; p++) {
+                html += `<th>الحصة ${p}</th>`;
+                if (p === b1After) html += `<th>الفسحة 🥪</th>`;
+                if (p === b2After && p !== b1After) html += `<th>الفسحة 🥪</th>`;
+            }
             html += `</tr></thead><tbody>`;
 
             days.forEach((day, dIdx) => {
                 html += `<tr><td class="day-cell">${day}</td>`;
                 for (let p = 1; p <= periods; p++) {
                     html += `<td><input type="text" class="sch-input" data-day="${dIdx}" data-period="${p}" placeholder="..."></td>`;
+                    
+                    if (p === b1After) {
+                        html += `<td class="day-cell" style="font-size:10px; background:var(--custom-soft-bg) !important; color:var(--custom-main) !important;">${b1Dur || 'استراحة'}</td>`;
+                    }
+                    if (p === b2After && p !== b1After) {
+                        html += `<td class="day-cell" style="font-size:10px; background:var(--custom-soft-bg) !important; color:var(--custom-main) !important;">${b2Dur || 'استراحة'}</td>`;
+                    }
                 }
                 html += `</tr>`;
             });
@@ -1879,15 +2042,20 @@
             let quoteText = document.getElementById('customQuoteTextarea').value.trim();
             let grade = document.getElementById('studentGradeInput').value.trim();
             let section = document.getElementById('studentSectionInput').value.trim();
-            let term = document.getElementById('studentTermInput').value.trim();
+            let year = document.getElementById('studentYearInput').value.trim();
 
             let scheduleData = {
                 periods: periods,
                 workDays: workDays,
+                breaksCount: document.getElementById('breaksCountSelect').value,
+                b1After: document.getElementById('break1AfterSelect').value,
+                b1Dur: document.getElementById('break1DurationInput').value,
+                b2After: document.getElementById('break2AfterSelect').value,
+                b2Dur: document.getElementById('break2DurationInput').value,
                 quote: quoteText,
                 grade: grade,
                 section: section,
-                term: term,
+                year: year,
                 headerColor: document.getElementById('colorHeader').value,
                 dayBgColor: document.getElementById('colorDayBg').value,
                 mainBorderColor: document.getElementById('colorMainBorder').value,
@@ -1907,7 +2075,7 @@
             if (allUsers[activeId]) {
                 allUsers[activeId].schoolSchedule = scheduleData;
                 localStorage.setItem('allUniversalUsersDB', JSON.stringify(allUsers));
-                alert("تم حفظ جدول الحصص والتصميم بنجاح! 💾✨");
+                alert("تم حفظ الجدول السنوي بنجاح! 💾✨");
             }
         }
 
@@ -1921,11 +2089,16 @@
 
             let sch = user.schoolSchedule;
             if (sch.workDays) document.getElementById('workDaysSelect').value = sch.workDays;
-            if (sch.periods) document.getElementById('periodsCount').value = sch.periods;
+            if (sch.periods && sch.periods >= 6) document.getElementById('periodsCount').value = sch.periods;
+            
+            if (sch.breaksCount !== undefined) document.getElementById('breaksCountSelect').value = sch.breaksCount;
+            if (sch.b1Dur) document.getElementById('break1DurationInput').value = sch.b1Dur;
+            if (sch.b2Dur) document.getElementById('break2DurationInput').value = sch.b2Dur;
+
             if (sch.quote) document.getElementById('customQuoteTextarea').value = sch.quote;
             if (sch.grade) document.getElementById('studentGradeInput').value = sch.grade;
             if (sch.section) document.getElementById('studentSectionInput').value = sch.section;
-            if (sch.term) document.getElementById('studentTermInput').value = sch.term;
+            if (sch.year) document.getElementById('studentYearInput').value = sch.year;
 
             if (sch.headerColor) document.getElementById('colorHeader').value = sch.headerColor;
             if (sch.dayBgColor) document.getElementById('colorDayBg').value = sch.dayBgColor;
@@ -2050,12 +2223,8 @@
                 dayCooking.forEach(c => evHTML += `<div class="calendar-event" style="background:#e67e22;">🍳 ${c.name}</div>`);
                 dayOutings.forEach(o => evHTML += `<div class="calendar-event" style="background:#2980b9;">🚗 ${o.place}</div>`);
 
-                let examsJSON = JSON.stringify(dayExams).replace(/"/g, '&quot;');
-                let cookingJSON = JSON.stringify(dayCooking).replace(/"/g, '&quot;');
-                let outingsJSON = JSON.stringify(dayOutings).replace(/"/g, '&quot;');
-
                 html += `
-                    <div class="calendar-cell ${hasExam ? 'has-exam' : ''}" onclick="showDayDetails('${dateStr}', ${examsJSON}, ${cookingJSON}, ${outingsJSON})">
+                    <div class="calendar-cell ${hasExam ? 'has-exam' : ''}" onclick="showDayDetails('${dateStr}')">
                         <span class="day-num">${day}</span>
                         ${evHTML}
                     </div>
