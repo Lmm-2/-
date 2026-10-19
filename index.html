@@ -429,7 +429,7 @@
         .printable-sheet-wrapper {
             width: 100%;
             background: #ffffff;
-            padding: 12px 16px;
+            padding: 16px 20px;
             border: 3.5px solid var(--custom-main);
             border-radius: 16px;
             position: relative;
@@ -439,7 +439,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 8px;
+            gap: 12px;
         }
 
         .printable-sheet-wrapper::before {
@@ -460,9 +460,9 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--custom-main), var(--custom-light));
             color: white;
-            padding: 5px 35px;
+            padding: 6px 35px;
             border-radius: 20px;
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 800;
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
@@ -472,7 +472,7 @@
             justify-content: space-around;
             background: var(--custom-soft-bg);
             border: 1.5px solid var(--custom-border);
-            padding: 5px 10px;
+            padding: 8px 10px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
@@ -497,14 +497,13 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            min-width: 550px;
             border-radius: 8px;
             overflow: hidden;
         }
 
         .schedule-table-custom th, .schedule-table-custom td {
             border: 1.5px solid var(--custom-border);
-            padding: 7px 4px;
+            padding: 8px 4px;
             text-align: center;
             vertical-align: middle;
         }
@@ -523,7 +522,7 @@
             font-weight: 800;
             color: var(--custom-table-header);
             font-size: 13px;
-            width: 12%;
+            width: 14%;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }
@@ -542,20 +541,20 @@
         .sheet-bottom-simple {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .quote-banner-box {
             background: var(--custom-soft-bg);
             border: 1.5px dashed var(--custom-light);
             border-radius: 8px;
-            padding: 6px 10px;
+            padding: 8px 10px;
             text-align: center;
         }
 
         .quote-banner-box textarea {
             width: 100%;
-            height: 32px;
+            height: 36px;
             border: none;
             background: transparent;
             color: var(--custom-main);
@@ -572,25 +571,25 @@
             background: #fff9fb;
             border: 1.5px solid var(--custom-border);
             border-radius: 8px;
-            padding: 8px 12px;
+            padding: 10px 12px;
         }
 
         .notes-print-title {
             font-size: 12px;
             font-weight: 800;
             color: var(--custom-main);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .notes-blank-lines {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .blank-line {
             border-bottom: 1.5px dashed var(--custom-light);
-            height: 14px;
+            height: 18px;
         }
 
         .sheet-footer {
@@ -598,14 +597,14 @@
             font-size: 11px;
             font-weight: 800;
             color: var(--custom-main);
-            padding-top: 2px;
+            padding-top: 4px;
         }
 
         /* ------------------------------------------------------------- */
-        /* قواعد طباعة مصلحة ومضمونة 100% لإيقاف الصفحة البيضاء */
+        /* إعدادات طباعة بالطول A4 Portrait شائعة وموثوقة */
         /* ------------------------------------------------------------- */
         @page {
-            size: A4 landscape;
+            size: A4 portrait;
             margin: 0;
         }
 
@@ -615,19 +614,19 @@
             }
 
             html, body {
-                width: 100% !important;
-                height: 100% !important;
+                width: 210mm !important;
+                height: 297mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
-                overflow: visible !important;
+                overflow: hidden !important;
             }
 
             body {
                 display: block !important;
             }
 
-            .container, .card, #appScreen {
+            .container, .card, #appScreen, #schoolScheduleSection {
                 padding: 0 !important;
                 margin: 0 !important;
                 border: none !important;
@@ -641,12 +640,12 @@
                 position: absolute !important;
                 top: 0 !important;
                 left: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                max-width: 100vw !important;
-                max-height: 100vh !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-width: 210mm !important;
+                max-height: 297mm !important;
                 margin: 0 !important;
-                padding: 8mm 12mm !important;
+                padding: 12mm 15mm !important;
                 box-sizing: border-box !important;
                 border: 4px solid var(--custom-main) !important;
                 border-radius: 0 !important;
@@ -662,17 +661,25 @@
             .schedule-table-custom {
                 min-width: 100% !important;
                 width: 100% !important;
-                margin: 4px 0 !important;
+                margin: 6px 0 !important;
             }
 
             .schedule-table-custom th {
-                padding: 7px 3px !important;
-                font-size: 12px !important;
+                padding: 8px 4px !important;
+                font-size: 11px !important;
             }
 
             .schedule-table-custom td {
-                padding: 7px 3px !important;
+                padding: 10px 4px !important;
                 font-size: 11px !important;
+            }
+
+            .notes-blank-lines {
+                gap: 12px !important;
+            }
+
+            .blank-line {
+                height: 24px !important;
             }
         }
 
@@ -1019,6 +1026,7 @@
                             <div class="notes-blank-lines">
                                 <div class="blank-line"></div>
                                 <div class="blank-line"></div>
+                                <div class="blank-line"></div>
                             </div>
                         </div>
                     </div>
@@ -1029,7 +1037,7 @@
                 </div>
 
                 <div class="no-print" style="margin-top: 15px; text-align: center;">
-                    <button class="action-btn" onclick="window.print()" style="padding: 12px 30px; font-size: 15px;">طباعة الجدول بصفحة A4 واحدة 🖨️✨</button>
+                    <button class="action-btn" onclick="window.print()" style="padding: 12px 30px; font-size: 15px;">طباعة الجدول بصفحة A4 طولية واحدة 🖨️✨</button>
                 </div>
             </div>
 
@@ -1352,7 +1360,7 @@
             let rememberMe = document.getElementById('rememberMeAuth').checked;
 
             if (!name || !id || !selectedGender) {
-                alert("الرجاء تعبئة كافة الحقول واختيار التصنيف.");
+                alert("الرجاء تعبئة كافة الحقول وااختيار التصنيف.");
                 return;
             }
 
@@ -1408,13 +1416,13 @@
                 <p><strong>1. التقويم التفاعلي:</strong> يمكنكِ التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقري على أي يوم لعرض كافة تفاصيل امتحاناتكِ وأنشطتكِ المسجلة فيه مرة واحدة.</p>
                 <p><strong>2. قسم الامتحانات:</strong> أضيفي امتحاناتكِ مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
                 <p><strong>3. مساعد الفاينل الذكي:</strong> أدخلي امتحاناتكِ وساعات دراستكِ اليومية لتوليدي خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
-                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 أفقية واحدة متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 طولية متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
                 <p><strong>5. الإضافة السريعة (➕):</strong> اضغطي الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
             ` : `
                 <p><strong>1. التقويم التفاعلي:</strong> يمكنك التنقل بين الأشهر والسنوات بدءاً من عام 2026، وانقر على أي يوم لعرض كافة تفاصيل امتحاناتك وأنشطتك المسجلة فيه مرة واحدة.</p>
                 <p><strong>2. قسم الامتحانات:</strong> أضف امتحاناتك مع اختيار لون المادة، وسيظهر وسم "نفذ الوقت ⌛" تلقائياً إن انتهى تاريخ الامتحان دون إتمامه.</p>
                 <p><strong>3. مساعد الفاينل الذكي:</strong> أدخل امتحاناتك وساعات دراستك اليومية لتوليد خطة دراسية متوازنة للفاينل وقابلة للطباعة.</p>
-                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 أفقية واحدة متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
+                <p><strong>4. جدول الحصص المدرسية:</strong> جدول مزخرف مخصص للطباعة بصفحة A4 طولية متكاملة مع إمكانية تحديد ألوانك المفضلة.</p>
                 <p><strong>5. الإضافة السريعة (➕):</strong> اضغط الزر في منتصف الشريط السفلي لإضافة أي مهمة أو مشوار بضغطة واحدة.</p>
             `;
 
